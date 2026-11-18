@@ -131,11 +131,11 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
-<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
+<audio id="bgm" src="musik.mp3" loop preload="auto" autoplay></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
 <div class="hdr-r">
-<button type="button" class="mbtn" id="mbtn">🔇 Musik Aus</button>
+<button type="button" class="mbtn on" id="mbtn">🎵 Musik An</button>
 <div class="langs">
 <button type="button" class="flg act" id="lde">🇩🇪 DE</button>
 <button type="button" class="flg" id="len">🇬🇧 EN</button>
@@ -217,25 +217,28 @@ und lokale Steuern vor Ort achten.</p>
 <script>
 const $=id=>document.getElementById(id);
 const PASS="paul2026";
-let ok=false,lang="de",playing=false;
+let ok=false,lang="de",wantPlay=true;
 
 function renderMusic(){
   const btn=$("mbtn");
-  btn.classList.toggle("on",playing);
-  if(lang==="de"){btn.textContent=playing?"🎵 Musik An":"🔇 Musik Aus";}
-  else{btn.textContent=playing?"🎵 Music On":"🔇 Music Off";}
+  btn.classList.toggle("on",wantPlay);
+  if(lang==="de"){btn.textContent=wantPlay?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=wantPlay?"🎵 Music On":"🔇 Music Off";}
+}
+
+function tryPlay(){
+  if(!wantPlay)return;
+  const a=$("bgm");
+  a.volume=0.45;
+  a.play().catch(()=>{});
 }
 
 function toggleMusic(){
   const a=$("bgm");
-  if(!playing){
-    a.volume=0.45;
-    a.play().then(()=>{playing=true;renderMusic();}).catch(()=>{});
-  }else{
-    a.pause();
-    playing=false;
-    renderMusic();
-  }
+  wantPlay=!wantPlay;
+  if(wantPlay){tryPlay();}
+  else{a.pause();}
+  renderMusic();
 }
 
 function renderBtns(){
@@ -324,6 +327,9 @@ $("lde").addEventListener("click",()=>setLang("de"));
 $("len").addEventListener("click",()=>setLang("en"));
 $("pb").addEventListener("click",checkPw);
 $("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
+document.addEventListener("pointerdown",e=>{
+  if(e.target!==$("mbtn")&&wantPlay&&$("bgm").paused)tryPlay();
+});
 "b1;b2;b3;b4".split(";").forEach(id=>{
   $(id).addEventListener("click",e=>{
     if(!ok){
@@ -333,13 +339,14 @@ $("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
       $("pi").focus();
     }else{
       $("bgm").pause();
-      playing=false;
+      wantPlay=false;
       renderMusic();
     }
   });
 });
 
 try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
+tryPlay();
 </script>
 </body>
 </html>
