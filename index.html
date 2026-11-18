@@ -10,7 +10,7 @@ html,body{margin:0;padding:10px;
 background:linear-gradient(180deg,#dbeafe 0%,#f0f9ff 100%);
 height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
-flex-direction:column;overflow-x:hidden}
+flex-direction:column;overflow:hidden}
 .welcome{position:fixed;inset:0;background:rgba(15,41,66,.88);
 display:flex;align-items:center;justify-content:center;
 z-index:2000;padding:20px;backdrop-filter:blur(4px)}
@@ -25,40 +25,46 @@ padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
 box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 .hdr{display:flex;justify-content:space-between;align-items:center;
-background:#0f2942;padding:9px 14px;border-radius:12px;
-margin-bottom:10px;flex-wrap:nowrap;gap:10px;flex-shrink:0;
+background:#0f2942;padding:8px 12px;border-radius:12px;
+margin-bottom:10px;flex-wrap:nowrap;gap:8px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.hdr-l{display:flex;align-items:center;gap:10px;min-width:0}
-.tit{font-weight:bold;color:#fff;font-size:1rem;margin:0;
+.hdr-l{display:flex;align-items:center;gap:8px;min-width:0}
+.tit{font-weight:bold;color:#fff;font-size:.94rem;margin:0;
 white-space:nowrap}
-.langs{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.langs{display:flex;gap:3px;align-items:center;flex-shrink:0}
 .flg,.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:4px 8px;font-size:.76rem;
+border-radius:6px;padding:4px 7px;font-size:.73rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:6px;align-items:center;flex-shrink:0}
-.seg{font-size:.76rem;padding:6px 10px;border-radius:6px;
+.cp{display:flex;gap:5px;align-items:center;flex-shrink:0}
+.seg{font-size:.72rem;padding:5px 8px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
-white-space:nowrap}
+white-space:nowrap;cursor:pointer}
 .seg.upg{background:#1e40af;border-color:#60a5fa}
+.seg.home{background:#0f766e;border-color:#5eead4}
 .locked{opacity:.55;cursor:not-allowed}
 .bento{display:grid;grid-template-columns:1fr 1fr;
 grid-template-rows:auto 1fr;gap:12px;flex:1;min-height:0}
+.sub-view{display:none;flex:1;min-height:0;border-radius:12px;
+overflow:hidden;border:1px solid #93c5fd;background:#fff;
+box-shadow:0 4px 12px rgba(3,105,161,.08)}
+.sub-view iframe{width:100%;height:100%;border:none;display:block}
 .box{background:#fff;border:1px solid #93c5fd;border-radius:12px;
 padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
 display:flex;flex-direction:column;height:100%;
 box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
-@media(max-width:1050px){
+@media(max-width:1060px){
 .hdr,.hdr-l{flex-wrap:wrap}
 .tit{white-space:normal}
 }
 @media(max-width:740px){
-html,body{height:auto}
+html,body{height:auto;overflow:auto}
 .bento{grid-template-columns:1fr;grid-template-rows:auto}
 .box.wide{grid-column:span 1}
+.sub-view{height:82vh}
 }
 .pic{position:relative;border-radius:10px;overflow:hidden;
 min-height:155px;display:flex;align-items:flex-end;padding:16px;
@@ -162,12 +168,16 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </div>
 </div>
 <div class="cp">
+<button type="button" id="b0" class="seg home" style="display:none">🏠 Start</button>
 <a id="b1" href="/reise-alert/meine-hotelsuche.html" class="seg locked">🔒 Hotelsuche</a>
 <a id="b2" href="/reise-alert/meine-flugbuchungen.html" class="seg locked">🔒 Flugbuchungen</a>
 <a id="b3" href="/reise-alert/index.html" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
 </div>
 </div>
-<div class="bento">
+<div class="sub-view" id="sview">
+<iframe id="sframe" src="about:blank" title="Suche"></iframe>
+</div>
+<div class="bento" id="homeview">
 <div class="box wide">
 <div class="pic">
 <div class="ptxt">
@@ -264,14 +274,29 @@ $("wbtn").addEventListener("click",()=>{
   startMusic();
 });
 
+function showHome(){
+  $("sview").style.display="none";
+  $("homeview").style.display="grid";
+  $("b0").style.display="none";
+}
+
+function openSub(url){
+  $("homeview").style.display="none";
+  $("sview").style.display="block";
+  $("b0").style.display="inline-block";
+  $("sframe").src=url;
+}
+
 function renderBtns(){
   const p=ok?"":"🔒 ";
   if(lang==="de"){
+    $("b0").textContent="🏠 Start";
     $("b1").textContent=p+"🏨 Hotelsuche";
     $("b2").textContent=p+"📋 Flugbuchungen";
     $("b3").textContent=p+"✈️ Zur Flugsuche ➡️";
     $("b4").textContent=p+"✈️ Flugkonfiguration öffnen ➡️";
   }else{
+    $("b0").textContent="🏠 Home";
     $("b1").textContent=p+"🏨 Hotels";
     $("b2").textContent=p+"📋 Bookings";
     $("b3").textContent=p+"✈️ Flight Search ➡️";
@@ -345,26 +370,8 @@ function checkPw(){
   }
 }
 
+$("b0").addEventListener("click",showHome);
 $("mbtn").addEventListener("click",toggleMusic);
 $("lde").addEventListener("click",()=>setLang("de"));
 $("len").addEventListener("click",()=>setLang("en"));
 $("pb").addEventListener("click",checkPw);
-$("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
-"b1;b2;b3;b4".split(";").forEach(id=>{
-  $(id).addEventListener("click",e=>{
-    if(!ok){
-      e.preventDefault();
-      $("pm").style.color="#991b1b";
-      $("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
-      $("pi").focus();
-    }else{
-      $("bgm").pause();
-      renderMusic();
-    }
-  });
-});
-
-try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
-</script>
-</body>
-</html>
