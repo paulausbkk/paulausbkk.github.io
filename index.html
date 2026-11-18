@@ -58,25 +58,30 @@ grid-template-rows:repeat(3,1fr);gap:8px;flex:1;min-height:0}
 border:1px solid #bae6fd;min-height:0;background:#e0f2fe;
 display:block;text-decoration:none;cursor:zoom-in}
 .gitem.tall{grid-row:span 3}
-.gitem img,.info-pics img{width:100%;height:100%;object-fit:cover;
+.gitem img{width:100%;height:100%;object-fit:cover;
 object-position:center;display:block;transition:.25s}
 .gitem.tall img{object-position:center 15%}
-.gitem:hover img,.info-pics a:hover img{transform:scale(1.04);
-filter:brightness(1.06)}
+.gitem:hover img{transform:scale(1.04);filter:brightness(1.06)}
 .gnum{position:absolute;top:5px;left:5px;z-index:2;
 background:rgba(15,41,66,.85);color:#fff;font-weight:bold;
 font-size:.75rem;padding:2px 7px;border-radius:5px;
 border:1px solid #7dd3fc}
+@keyframes pulseHint{
+0%,100%{border-color:#7f1d1d;box-shadow:0 0 0 rgba(185,28,28,0)}
+50%{border-color:#dc2626;box-shadow:0 0 14px rgba(185,28,28,.7)}
+}
+.bn{background:#0f2942;border:3px solid #991b1b;
+border-left:7px solid #991b1b;border-radius:8px;padding:10px 13px;
+color:#fff;font-weight:bold;font-size:.86rem;line-height:1.4;
+margin-bottom:10px;animation:pulseHint 2.2s infinite ease-in-out}
+.sub-ct{font-weight:bold;font-size:.92rem;color:var(--d);
+margin:2px 0 6px 0}
 details{background:#f0f9ff;border:1px solid #bae6fd;
-border-radius:8px;padding:7px 11px;margin-bottom:7px;flex-shrink:0}
+border-radius:8px;padding:7px 11px;margin-bottom:6px;flex-shrink:0}
 summary{font-weight:bold;cursor:pointer;color:var(--d);
-font-size:.88rem}
-details p{margin:5px 0 0 0;font-size:.83rem;line-height:1.38;
+font-size:.86rem}
+details p{margin:5px 0 0 0;font-size:.82rem;line-height:1.38;
 color:#1e293b}
-.info-pics{display:grid;grid-template-columns:repeat(3,1fr);
-gap:8px;flex:1;min-height:70px;margin-top:4px}
-.info-pics a{display:block;border-radius:8px;overflow:hidden;
-border:1px solid #bae6fd;cursor:zoom-in}
 .lb{position:fixed;inset:0;background:rgba(15,23,42,.92);
 display:none;align-items:center;justify-content:center;
 z-index:999;padding:20px}
@@ -122,7 +127,12 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </div>
 </div>
 <div class="box">
-<div class="ct">ℹ️ Wichtige Reise-Hinweise (Klicken)</div>
+<div class="ct">⚠️ Wichtige Hinweise für die Nutzung unserer Seite</div>
+<div class="bn">ℹ️ <b>Hinweis:</b> Diese Seite dient als direkter
+Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck-
+und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten
+Anbieterseiten.</div>
+<div class="sub-ct">ℹ️ Wichtige Reise-Hinweise (Klicken)</div>
 <details open>
 <summary>🛂 Einreise & Dokumente weltweit</summary>
 <p>Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und
@@ -139,11 +149,6 @@ auf der gewählten Anbieterseite beim Buchen hinzufügen.</p>
 <p>Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen
 und lokale Steuern vor Ort achten.</p>
 </details>
-<div class="info-pics">
-<a href="#f5"><img src="https://unsplash.com" alt="Lagune"></a>
-<a href="#f6"><img src="https://unsplash.com" alt="Tempel Asien"></a>
-<a href="#f7"><img src="https://unsplash.com" alt="Inselwelt"></a>
-</div>
 </div>
 </div>
 <div id="f1" class="lb"><a href="#_" class="lb-bg"></a>
@@ -154,11 +159,5 @@ und lokale Steuern vor Ort achten.</p>
 <a href="#_" class="lb-x">✖ Schließen</a><img src="Strand2.jpg" alt="3"></div>
 <div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
 <a href="#_" class="lb-x">✖ Schließen</a><img src="20250205_181003.jpg" alt="4"></div>
-<div id="f5" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="5"></div>
-<div id="f6" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="6"></div>
-<div id="f7" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="7"></div>
 </body>
 </html>
