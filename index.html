@@ -13,19 +13,19 @@ color:var(--t);box-sizing:border-box;display:flex;
 flex-direction:column;overflow-x:hidden}
 .hdr{display:flex;justify-content:space-between;align-items:center;
 background:#0f2942;padding:9px 14px;border-radius:12px;
-margin-bottom:10px;flex-wrap:nowrap;gap:10px;flex-shrink:0;
+margin-bottom:10px;flex-wrap:nowrap;gap:8px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.tit{font-weight:bold;color:#fff;font-size:1rem;margin:0;
+.tit{font-weight:bold;color:#fff;font-size:.98rem;margin:0;
 white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hdr-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.langs{display:flex;gap:5px;align-items:center}
-.flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:4px 8px;font-size:.78rem;
+.hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.langs{display:flex;gap:4px;align-items:center}
+.flg,.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
+border-radius:6px;padding:4px 8px;font-size:.76rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
-.flg:hover,.flg.act{background:#0284c7;border-color:#7dd3fc;
+.flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:6px;align-items:center}
-.seg{font-size:.74rem;padding:6px 10px;border-radius:6px;
+.cp{display:flex;gap:5px;align-items:center}
+.seg{font-size:.73rem;padding:6px 9px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
 white-space:nowrap}
@@ -38,7 +38,7 @@ padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
 display:flex;flex-direction:column;height:100%;
 box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
-@media(max-width:860px){
+@media(max-width:960px){
 .hdr{flex-wrap:wrap}
 .tit{white-space:normal}
 }
@@ -131,9 +131,11 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
 <div class="hdr-r">
+<button type="button" class="mbtn" id="mbtn">🔇 Musik Aus</button>
 <div class="langs">
 <button type="button" class="flg act" id="lde">🇩🇪 DE</button>
 <button type="button" class="flg" id="len">🇬🇧 EN</button>
@@ -215,7 +217,26 @@ und lokale Steuern vor Ort achten.</p>
 <script>
 const $=id=>document.getElementById(id);
 const PASS="paul2026";
-let ok=false,lang="de";
+let ok=false,lang="de",playing=false;
+
+function renderMusic(){
+  const btn=$("mbtn");
+  btn.classList.toggle("on",playing);
+  if(lang==="de"){btn.textContent=playing?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=playing?"🎵 Music On":"🔇 Music Off";}
+}
+
+function toggleMusic(){
+  const a=$("bgm");
+  if(!playing){
+    a.volume=0.45;
+    a.play().then(()=>{playing=true;renderMusic();}).catch(()=>{});
+  }else{
+    a.pause();
+    playing=false;
+    renderMusic();
+  }
+}
 
 function renderBtns(){
   const p=ok?"":"🔒 ";
@@ -275,6 +296,7 @@ function setLang(l){
     "x1;x2;x3;x4".split(";").forEach(id=>$(id).textContent="✖ Close");
     if(ok)$("pm").textContent="✅ Unlocked";
   }
+  renderMusic();
   renderBtns();
 }
 
@@ -297,6 +319,7 @@ function checkPw(){
   }
 }
 
+$("mbtn").addEventListener("click",toggleMusic);
 $("lde").addEventListener("click",()=>setLang("de"));
 $("len").addEventListener("click",()=>setLang("en"));
 $("pb").addEventListener("click",checkPw);
@@ -308,6 +331,10 @@ $("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
       $("pm").style.color="#991b1b";
       $("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
       $("pi").focus();
+    }else{
+      $("bgm").pause();
+      playing=false;
+      renderMusic();
     }
   });
 });
