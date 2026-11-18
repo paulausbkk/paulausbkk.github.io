@@ -11,6 +11,19 @@ background:linear-gradient(180deg,#dbeafe 0%,#f0f9ff 100%);
 height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
 flex-direction:column;overflow-x:hidden}
+.welcome{position:fixed;inset:0;background:rgba(15,41,66,.88);
+display:flex;align-items:center;justify-content:center;
+z-index:2000;padding:20px;backdrop-filter:blur(4px)}
+.w-card{background:#fff;border:2px solid #7dd3fc;border-radius:16px;
+padding:26px 30px;text-align:center;max-width:400px;
+box-shadow:0 12px 32px rgba(0,0,0,.45)}
+.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
+.w-card p{margin:0 0 18px 0;color:#334155;font-size:.92rem;
+line-height:1.45}
+.w-btn{background:#0284c7;color:#fff;border:none;border-radius:10px;
+padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
+box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
+.w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 .hdr{display:flex;justify-content:space-between;align-items:center;
 background:#0f2942;padding:9px 14px;border-radius:12px;
 margin-bottom:10px;flex-wrap:nowrap;gap:8px;flex-shrink:0;
@@ -131,11 +144,18 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
+<div class="welcome" id="wov">
+<div class="w-card">
+<h2>🌴 Willkommen bei paulausbkk</h2>
+<p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
+<button type="button" class="w-btn" id="wbtn">🎵 Seite mit Musik betreten ➡️</button>
+</div>
+</div>
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
 <div class="hdr-r">
-<button type="button" class="mbtn" id="mbtn">🔇 Musik Aus</button>
+<button type="button" class="mbtn on" id="mbtn">🎵 Musik An</button>
 <div class="langs">
 <button type="button" class="flg act" id="lde">🇩🇪 DE</button>
 <button type="button" class="flg" id="len">🇬🇧 EN</button>
@@ -217,7 +237,7 @@ und lokale Steuern vor Ort achten.</p>
 <script>
 const $=id=>document.getElementById(id);
 const PASS="paul2026";
-let ok=false,lang="de",autoAllowed=true;
+let ok=false,lang="de";
 
 function renderMusic(){
   const isPlaying=!$("bgm").paused;
@@ -227,8 +247,7 @@ function renderMusic(){
   else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
 }
 
-function tryPlay(){
-  if(!autoAllowed)return;
+function startMusic(){
   const a=$("bgm");
   a.volume=0.45;
   a.play().then(renderMusic).catch(renderMusic);
@@ -236,15 +255,14 @@ function tryPlay(){
 
 function toggleMusic(){
   const a=$("bgm");
-  if(a.paused){
-    autoAllowed=true;
-    tryPlay();
-  }else{
-    autoAllowed=false;
-    a.pause();
-    renderMusic();
-  }
+  if(a.paused){startMusic();}
+  else{a.pause();renderMusic();}
 }
+
+$("wbtn").addEventListener("click",()=>{
+  $("wov").style.display="none";
+  startMusic();
+});
 
 function renderBtns(){
   const p=ok?"":"🔒 ";
@@ -332,9 +350,6 @@ $("lde").addEventListener("click",()=>setLang("de"));
 $("len").addEventListener("click",()=>setLang("en"));
 $("pb").addEventListener("click",checkPw);
 $("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
-document.addEventListener("pointerdown",e=>{
-  if(e.target!==$("mbtn")&&autoAllowed&&$("bgm").paused)tryPlay();
-});
 "b1;b2;b3;b4".split(";").forEach(id=>{
   $(id).addEventListener("click",e=>{
     if(!ok){
@@ -343,7 +358,6 @@ document.addEventListener("pointerdown",e=>{
       $("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
       $("pi").focus();
     }else{
-      autoAllowed=false;
       $("bgm").pause();
       renderMusic();
     }
@@ -351,7 +365,6 @@ document.addEventListener("pointerdown",e=>{
 });
 
 try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
-tryPlay();
 </script>
 </body>
 </html>
