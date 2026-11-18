@@ -25,20 +25,20 @@ padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
 box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 .hdr{display:flex;justify-content:space-between;align-items:center;
-background:#0f2942;padding:9px 14px;border-radius:12px;
-margin-bottom:10px;flex-wrap:nowrap;gap:8px;flex-shrink:0;
+background:#0f2942;padding:8px 12px;border-radius:12px;
+margin-bottom:10px;flex-wrap:nowrap;gap:6px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.tit{font-weight:bold;color:#fff;font-size:.98rem;margin:0;
-white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.langs{display:flex;gap:4px;align-items:center}
+.tit{font-weight:bold;color:#fff;font-size:.95rem;margin:0;
+white-space:nowrap}
+.hdr-r{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.langs{display:flex;gap:3px;align-items:center}
 .flg,.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:4px 8px;font-size:.76rem;
+border-radius:6px;padding:4px 6px;font-size:.72rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:5px;align-items:center}
-.seg{font-size:.73rem;padding:6px 9px;border-radius:6px;
+.cp{display:flex;gap:4px;align-items:center}
+.seg{font-size:.7rem;padding:5px 7px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
 white-space:nowrap}
@@ -157,13 +157,13 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="hdr-r">
 <button type="button" class="mbtn on" id="mbtn">🎵 Musik An</button>
 <div class="langs">
-<button type="button" class="flg act" id="lde">🇩🇪 DE</button>
-<button type="button" class="flg" id="len">🇬🇧 EN</button>
+<button type="button" class="flg act" id="lde">🇩🇪</button>
+<button type="button" class="flg" id="len">🇬🇧</button>
 </div>
 <div class="cp">
-<a id="b1" href="/reise-alert/meine-hotelsuche.html" class="seg locked">🔒 Hotelsuche</a>
-<a id="b2" href="/reise-alert/meine-flugbuchungen.html" class="seg locked">🔒 Flugbuchungen</a>
-<a id="b3" href="/reise-alert/index.html" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
+<a id="b1" href="/reise-alert/meine-hotelsuche.html" class="seg locked">🔒 Hotels</a>
+<a id="b2" href="/reise-alert/meine-flugbuchungen.html" class="seg locked">🔒 Buchungen</a>
+<a id="b3" href="/reise-alert/index.html" class="seg upg locked">🔒 Flugsuche ➡️</a>
 </div>
 </div>
 </div>
@@ -267,14 +267,14 @@ $("wbtn").addEventListener("click",()=>{
 function renderBtns(){
   const p=ok?"":"🔒 ";
   if(lang==="de"){
-    $("b1").textContent=p+"🏨 Hotelsuche";
-    $("b2").textContent=p+"📋 Flugbuchungen";
-    $("b3").textContent=p+"✈️ Zur Flugsuche ➡️";
+    $("b1").textContent=p+"🏨 Hotels";
+    $("b2").textContent=p+"📋 Buchungen";
+    $("b3").textContent=p+"✈️ Flugsuche ➡️";
     $("b4").textContent=p+"✈️ Flugkonfiguration öffnen ➡️";
   }else{
     $("b1").textContent=p+"🏨 Hotels";
     $("b2").textContent=p+"📋 Bookings";
-    $("b3").textContent=p+"✈️ Flight Search ➡️";
+    $("b3").textContent=p+"✈️ Flights ➡️";
     $("b4").textContent=p+"✈️ Open Flight Search ➡️";
   }
 }
