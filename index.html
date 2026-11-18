@@ -12,20 +12,23 @@ height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
 flex-direction:column;overflow-x:hidden}
 .hdr{display:flex;justify-content:space-between;align-items:center;
-background:#0f2942;padding:10px 16px;border-radius:12px;
-margin-bottom:10px;flex-wrap:wrap;gap:8px;flex-shrink:0;
+background:#0f2942;padding:9px 14px;border-radius:12px;
+margin-bottom:10px;flex-wrap:nowrap;gap:10px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.tit{font-weight:bold;color:#fff;font-size:1.08rem;margin:0}
-.langs{display:flex;gap:6px;align-items:center}
+.tit{font-weight:bold;color:#fff;font-size:1rem;margin:0;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.langs{display:flex;gap:5px;align-items:center}
 .flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:4px 9px;font-size:.82rem;
-font-weight:bold;cursor:pointer;transition:.2s}
+border-radius:6px;padding:4px 8px;font-size:.78rem;
+font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .flg:hover,.flg.act{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.seg{font-size:.78rem;padding:7px 12px;border-radius:6px;
+.cp{display:flex;gap:6px;align-items:center}
+.seg{font-size:.74rem;padding:6px 10px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
-background:#0284c7;text-decoration:none;border:1px solid #38bdf8}
+background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
+white-space:nowrap}
 .seg.upg{background:#1e40af;border-color:#60a5fa}
 .locked{opacity:.55;cursor:not-allowed}
 .bento{display:grid;grid-template-columns:1fr 1fr;
@@ -35,6 +38,10 @@ padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
 display:flex;flex-direction:column;height:100%;
 box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
+@media(max-width:860px){
+.hdr{flex-wrap:wrap}
+.tit{white-space:normal}
+}
 @media(max-width:740px){
 html,body{height:auto}
 .bento{grid-template-columns:1fr;grid-template-rows:auto}
@@ -126,6 +133,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <body>
 <div class="hdr">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
+<div class="hdr-r">
 <div class="langs">
 <button type="button" class="flg act" id="lde">🇩🇪 DE</button>
 <button type="button" class="flg" id="len">🇬🇧 EN</button>
@@ -134,6 +142,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <a id="b1" href="/reise-alert/meine-hotelsuche.html" class="seg locked">🔒 Hotelsuche</a>
 <a id="b2" href="/reise-alert/meine-flugbuchungen.html" class="seg locked">🔒 Flugbuchungen</a>
 <a id="b3" href="/reise-alert/index.html" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
+</div>
 </div>
 </div>
 <div class="bento">
@@ -216,10 +225,10 @@ function renderBtns(){
     $("b3").textContent=p+"✈️ Zur Flugsuche ➡️";
     $("b4").textContent=p+"✈️ Flugkonfiguration öffnen ➡️";
   }else{
-    $("b1").textContent=p+"🏨 Hotel Search";
-    $("b2").textContent=p+"📋 Flight Bookings";
+    $("b1").textContent=p+"🏨 Hotels";
+    $("b2").textContent=p+"📋 Bookings";
     $("b3").textContent=p+"✈️ Flight Search ➡️";
-    $("b4").textContent=p+"✈️ Open Flight Configurator ➡️";
+    $("b4").textContent=p+"✈️ Open Flight Search ➡️";
   }
 }
 
@@ -247,7 +256,7 @@ function setLang(l){
     "x1;x2;x3;x4".split(";").forEach(id=>$(id).textContent="✖ Schließen");
     if(ok)$("pm").textContent="✅ Freigeschaltet";
   }else{
-    $("t-tit").textContent="🌴 Search your hotel and flight worldwide with paulausbkk";
+    $("t-tit").textContent="🌴 Search hotel and flight worldwide with paulausbkk";
     $("t-fly").textContent="Want to fly? Click here ↙️";
     $("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
     $("t-zoom").textContent="(Click to enlarge)";
@@ -307,4 +316,3 @@ try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
 </script>
 </body>
 </html>
-
