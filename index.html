@@ -10,7 +10,7 @@ html,body{margin:0;padding:10px;
 background:linear-gradient(180deg,#dbeafe 0%,#f0f9ff 100%);
 height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
-flex-direction:column}
+flex-direction:column;overflow-x:hidden}
 .hdr{display:flex;justify-content:space-between;align-items:center;
 background:#0f2942;padding:10px 16px;border-radius:12px;
 margin-bottom:10px;flex-wrap:wrap;gap:8px;flex-shrink:0;
@@ -21,20 +21,20 @@ box-shadow:0 4px 14px rgba(15,41,66,.18)}
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8}
 .seg.upg{background:#1e40af;border-color:#60a5fa}
-.bento{display:grid;
-grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+.bento{display:grid;grid-template-columns:1fr 1fr;
 grid-template-rows:auto 1fr;gap:12px;flex:1;min-height:0}
 .box{background:#fff;border:1px solid #93c5fd;border-radius:12px;
 padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
-display:flex;flex-direction:column;min-height:0}
+display:flex;flex-direction:column;height:100%;
+box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
 @media(max-width:740px){
 html,body{height:auto}
-.bento{grid-template-rows:auto}
+.bento{grid-template-columns:1fr;grid-template-rows:auto}
 .box.wide{grid-column:span 1}
 }
 .pic{position:relative;border-radius:10px;overflow:hidden;
-min-height:165px;display:flex;align-items:flex-end;padding:16px;
+min-height:155px;display:flex;align-items:flex-end;padding:16px;
 background-color:#0f2942;background-image:url("flug.jpg");
 background-position:center 22%;background-size:118%;
 background-repeat:no-repeat}
@@ -51,7 +51,7 @@ border-radius:8px;font-size:.9rem;border:1px solid #7dd3fc}
 border-bottom:2px solid #e0f2fe;padding-bottom:5px;margin-bottom:8px;
 flex-shrink:0}
 .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);
-grid-template-rows:1fr 82px;gap:6px;flex:1;min-height:180px}
+grid-template-rows:1fr 95px;gap:8px;flex:1;min-height:0}
 .gitem{position:relative;border-radius:8px;overflow:hidden;
 border:1px solid #bae6fd;min-height:0}
 .gitem.big{grid-column:span 3}
@@ -60,10 +60,10 @@ border:1px solid #bae6fd;min-height:0}
 color:#fff;font-weight:bold;font-size:.75rem;padding:2px 7px;
 border-radius:5px;border:1px solid #7dd3fc}
 details{background:#f0f9ff;border:1px solid #bae6fd;
-border-radius:8px;padding:7px 11px;margin-bottom:7px}
+border-radius:8px;padding:8px 11px;margin-bottom:8px}
 summary{font-weight:bold;cursor:pointer;color:var(--d);
-font-size:.88rem}
-details p{margin:6px 0 0 0;font-size:.84rem;line-height:1.4;
+font-size:.9rem}
+details p{margin:6px 0 0 0;font-size:.85rem;line-height:1.4;
 color:#1e293b}
 </style>
 </head>
