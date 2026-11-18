@@ -53,20 +53,40 @@ flex-shrink:0}
 .gal-grid{display:grid;grid-template-columns:1.25fr 1fr;
 grid-template-rows:repeat(3,1fr);gap:8px;flex:1;min-height:0}
 .gitem{position:relative;border-radius:8px;overflow:hidden;
-border:1px solid #bae6fd;min-height:0;background:#e0f2fe}
+border:1px solid #bae6fd;min-height:0;background:#e0f2fe;
+display:block;text-decoration:none;cursor:zoom-in}
 .gitem.tall{grid-row:span 3}
-.gitem img{width:100%;height:100%;object-fit:cover;
-object-position:center;display:block}
+.gitem img,.info-pics img{width:100%;height:100%;object-fit:cover;
+object-position:center;display:block;transition:.25s}
 .gitem.tall img{object-position:center 15%}
-.gnum{position:absolute;top:5px;left:5px;background:rgba(15,41,66,.85);
-color:#fff;font-weight:bold;font-size:.75rem;padding:2px 7px;
-border-radius:5px;border:1px solid #7dd3fc}
+.gitem:hover img,.info-pics a:hover img{transform:scale(1.04);
+filter:brightness(1.06)}
+.gnum{position:absolute;top:5px;left:5px;z-index:2;
+background:rgba(15,41,66,.85);color:#fff;font-weight:bold;
+font-size:.75rem;padding:2px 7px;border-radius:5px;
+border:1px solid #7dd3fc}
 details{background:#f0f9ff;border:1px solid #bae6fd;
-border-radius:8px;padding:8px 11px;margin-bottom:8px}
+border-radius:8px;padding:7px 11px;margin-bottom:7px;flex-shrink:0}
 summary{font-weight:bold;cursor:pointer;color:var(--d);
-font-size:.9rem}
-details p{margin:6px 0 0 0;font-size:.85rem;line-height:1.4;
+font-size:.88rem}
+details p{margin:5px 0 0 0;font-size:.83rem;line-height:1.38;
 color:#1e293b}
+.info-pics{display:grid;grid-template-columns:repeat(3,1fr);
+gap:8px;flex:1;min-height:70px;margin-top:4px}
+.info-pics a{display:block;border-radius:8px;overflow:hidden;
+border:1px solid #bae6fd;cursor:zoom-in}
+.lb{position:fixed;inset:0;background:rgba(15,23,42,.92);
+display:none;align-items:center;justify-content:center;
+z-index:999;padding:20px}
+.lb:target{display:flex}
+.lb img{max-width:94vw;max-height:88vh;border-radius:10px;
+border:2px solid #7dd3fc;box-shadow:0 10px 30px rgba(0,0,0,.6);
+object-fit:contain}
+.lb-bg{position:absolute;inset:0;cursor:zoom-out}
+.lb-x{position:fixed;top:16px;right:20px;z-index:1001;
+background:#0284c7;color:#fff;text-decoration:none;
+font-weight:bold;padding:8px 14px;border-radius:8px;
+border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
@@ -87,16 +107,16 @@ color:#1e293b}
 </div>
 </div>
 <div class="box">
-<div class="ct">🌟 Unsere Reiseempfehlung</div>
+<div class="ct">🌟 Unsere Reiseempfehlung (Klicken zum Vergrößern)</div>
 <div class="gal-grid">
-<div class="gitem tall"><span class="gnum">1</span>
-<img src="LiS.jpg" alt="Empfehlung 1"></div>
-<div class="gitem sm"><span class="gnum">2</span>
-<img src="Strand.jpg" alt="Empfehlung 2"></div>
-<div class="gitem sm"><span class="gnum">3</span>
-<img src="Strand2.jpg" alt="Empfehlung 3"></div>
-<div class="gitem sm"><span class="gnum">4</span>
-<img src="20250205_181003.jpg" alt="Empfehlung 4"></div>
+<a href="#f1" class="gitem tall"><span class="gnum">1</span>
+<img src="LiS.jpg" alt="Empfehlung 1"></a>
+<a href="#f2" class="gitem sm"><span class="gnum">2</span>
+<img src="Strand.jpg" alt="Empfehlung 2"></a>
+<a href="#f3" class="gitem sm"><span class="gnum">3</span>
+<img src="Strand2.jpg" alt="Empfehlung 3"></a>
+<a href="#f4" class="gitem sm"><span class="gnum">4</span>
+<img src="20250205_181003.jpg" alt="Empfehlung 4"></a>
 </div>
 </div>
 <div class="box">
@@ -117,7 +137,26 @@ auf der gewählten Anbieterseite beim Buchen hinzufügen.</p>
 <p>Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen
 und lokale Steuern vor Ort achten.</p>
 </details>
+<div class="info-pics">
+<a href="#f5"><img src="https://unsplash.com" alt="Lagune"></a>
+<a href="#f6"><img src="https://unsplash.com" alt="Tempel Asien"></a>
+<a href="#f7"><img src="https://unsplash.com" alt="Inselwelt"></a>
 </div>
 </div>
+</div>
+<div id="f1" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="LiS.jpg" alt="1"></div>
+<div id="f2" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="Strand.jpg" alt="2"></div>
+<div id="f3" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="Strand2.jpg" alt="3"></div>
+<div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="20250205_181003.jpg" alt="4"></div>
+<div id="f5" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="5"></div>
+<div id="f6" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="6"></div>
+<div id="f7" class="lb"><a href="#_" class="lb-bg"></a>
+<a href="#_" class="lb-x">✖ Schließen</a><img src="https://unsplash.com" alt="7"></div>
 </body>
 </html>
