@@ -131,11 +131,11 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
-<audio id="bgm" src="musik.mp3" loop preload="auto" autoplay></audio>
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
 <div class="hdr-r">
-<button type="button" class="mbtn on" id="mbtn">🎵 Musik An</button>
+<button type="button" class="mbtn" id="mbtn">🔇 Musik Aus</button>
 <div class="langs">
 <button type="button" class="flg act" id="lde">🇩🇪 DE</button>
 <button type="button" class="flg" id="len">🇬🇧 EN</button>
@@ -217,28 +217,33 @@ und lokale Steuern vor Ort achten.</p>
 <script>
 const $=id=>document.getElementById(id);
 const PASS="paul2026";
-let ok=false,lang="de",wantPlay=true;
+let ok=false,lang="de",autoAllowed=true;
 
 function renderMusic(){
+  const isPlaying=!$("bgm").paused;
   const btn=$("mbtn");
-  btn.classList.toggle("on",wantPlay);
-  if(lang==="de"){btn.textContent=wantPlay?"🎵 Musik An":"🔇 Musik Aus";}
-  else{btn.textContent=wantPlay?"🎵 Music On":"🔇 Music Off";}
+  btn.classList.toggle("on",isPlaying);
+  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
 }
 
 function tryPlay(){
-  if(!wantPlay)return;
+  if(!autoAllowed)return;
   const a=$("bgm");
   a.volume=0.45;
-  a.play().catch(()=>{});
+  a.play().then(renderMusic).catch(renderMusic);
 }
 
 function toggleMusic(){
   const a=$("bgm");
-  wantPlay=!wantPlay;
-  if(wantPlay){tryPlay();}
-  else{a.pause();}
-  renderMusic();
+  if(a.paused){
+    autoAllowed=true;
+    tryPlay();
+  }else{
+    autoAllowed=false;
+    a.pause();
+    renderMusic();
+  }
 }
 
 function renderBtns(){
@@ -328,7 +333,7 @@ $("len").addEventListener("click",()=>setLang("en"));
 $("pb").addEventListener("click",checkPw);
 $("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
 document.addEventListener("pointerdown",e=>{
-  if(e.target!==$("mbtn")&&wantPlay&&$("bgm").paused)tryPlay();
+  if(e.target!==$("mbtn")&&autoAllowed&&$("bgm").paused)tryPlay();
 });
 "b1;b2;b3;b4".split(";").forEach(id=>{
   $(id).addEventListener("click",e=>{
@@ -338,8 +343,8 @@ document.addEventListener("pointerdown",e=>{
       $("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
       $("pi").focus();
     }else{
+      autoAllowed=false;
       $("bgm").pause();
-      wantPlay=false;
       renderMusic();
     }
   });
