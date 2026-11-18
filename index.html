@@ -71,16 +71,22 @@ border:1px solid #7dd3fc}
 50%{border-color:#dc2626;box-shadow:0 0 14px rgba(185,28,28,.7)}
 }
 .bn{background:#0f2942;border:3px solid #991b1b;
-border-left:7px solid #991b1b;border-radius:8px;padding:10px 13px;
-color:#fff;font-weight:bold;font-size:.86rem;line-height:1.4;
-margin-bottom:10px;animation:pulseHint 2.2s infinite ease-in-out}
-.sub-ct{font-weight:bold;font-size:.92rem;color:var(--d);
-margin:2px 0 6px 0}
+border-left:7px solid #991b1b;border-radius:8px;padding:6px 10px;
+color:#fff;font-weight:bold;font-size:.46rem;line-height:1.35;
+margin-bottom:8px;flex-shrink:0;
+animation:pulseHint 2.2s infinite ease-in-out}
+.note-space{flex:1;min-height:58px;border:1px dashed #93c5fd;
+border-radius:8px;padding:8px 10px;margin-bottom:8px;
+background:#f8fafc;color:#475569;font-size:.82rem}
+.bottom-block{margin-top:auto;flex-shrink:0}
+.sub-ct{font-weight:bold;font-size:.9rem;color:var(--d);
+margin:0 0 5px 0}
 details{background:#f0f9ff;border:1px solid #bae6fd;
-border-radius:8px;padding:7px 11px;margin-bottom:6px;flex-shrink:0}
+border-radius:8px;padding:6px 10px;margin-bottom:5px}
+details:last-child{margin-bottom:0}
 summary{font-weight:bold;cursor:pointer;color:var(--d);
-font-size:.86rem}
-details p{margin:5px 0 0 0;font-size:.82rem;line-height:1.38;
+font-size:.84rem}
+details p{margin:4px 0 0 0;font-size:.8rem;line-height:1.35;
 color:#1e293b}
 .lb{position:fixed;inset:0;background:rgba(15,23,42,.92);
 display:none;align-items:center;justify-content:center;
@@ -127,13 +133,15 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </div>
 </div>
 <div class="box">
-<div class="ct">⚠️ Wichtige Hinweise für die Nutzung unserer Seite</div>
+<div class="ct">⚠️ Wichtige Hinweise für die Nutzer dieser Seite</div>
 <div class="bn">ℹ️ <b>Hinweis:</b> Diese Seite dient als direkter
 Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck-
 und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten
 Anbieterseiten.</div>
+<div class="note-space">Platz für deinen persönlichen Text (mind. 3 Zeilen)</div>
+<div class="bottom-block">
 <div class="sub-ct">ℹ️ Wichtige Reise-Hinweise (Klicken)</div>
-<details open>
+<details>
 <summary>🛂 Einreise & Dokumente weltweit</summary>
 <p>Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und
 eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online
@@ -149,6 +157,7 @@ auf der gewählten Anbieterseite beim Buchen hinzufügen.</p>
 <p>Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen
 und lokale Steuern vor Ort achten.</p>
 </details>
+</div>
 </div>
 </div>
 <div id="f1" class="lb"><a href="#_" class="lb-bg"></a>
