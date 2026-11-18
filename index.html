@@ -11,19 +11,6 @@ background:linear-gradient(180deg,#dbeafe 0%,#f0f9ff 100%);
 height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
 flex-direction:column;overflow:hidden}
-.welcome{position:fixed;inset:0;background:rgba(15,41,66,.88);
-display:flex;align-items:center;justify-content:center;
-z-index:2000;padding:20px;backdrop-filter:blur(4px)}
-.w-card{background:#fff;border:2px solid #7dd3fc;border-radius:16px;
-padding:26px 30px;text-align:center;max-width:400px;
-box-shadow:0 12px 32px rgba(0,0,0,.45)}
-.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
-.w-card p{margin:0 0 18px 0;color:#334155;font-size:.92rem;
-line-height:1.45}
-.w-btn{background:#0284c7;color:#fff;border:none;border-radius:10px;
-padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
-box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
-.w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 .hdr{display:flex;justify-content:space-between;align-items:center;
 background:#0f2942;padding:8px 12px;border-radius:12px;
 margin-bottom:10px;flex-wrap:nowrap;gap:8px;flex-shrink:0;
@@ -150,14 +137,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
-<div class="welcome" id="wov">
-<div class="w-card">
-<h2>🌴 Willkommen bei paulausbkk</h2>
-<p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<button type="button" class="w-btn" onclick="enterSite()">🎵 Seite mit Musik betreten ➡️</button>
-</div>
-</div>
-<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
+<audio id="bgm" src="musik.mp3" loop preload="auto" autoplay></audio>
 <div class="hdr">
 <div class="hdr-l">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
@@ -246,38 +226,32 @@ und lokale Steuern vor Ort achten.</p>
 <a href="#_" class="lb-x" id="x4">✖ Schließen</a><img src="20250205_181003.jpg" alt="4"></div>
 <script>
 const PASS="paul2026";
-let ok=false,lang="de";
+let ok=false,lang="de",wantPlay=true;
 
 function el(id){return document.getElementById(id);}
 
 function renderMusic(){
-  const a=el("bgm");
-  const isPlaying=a&&!a.paused;
   const btn=el("mbtn");
-  btn.classList.toggle("on",isPlaying);
-  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
-  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
+  btn.classList.toggle("on",wantPlay);
+  if(lang==="de"){btn.textContent=wantPlay?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=wantPlay?"🎵 Music On":"🔇 Music Off";}
 }
 
-function enterSite(){
-  el("wov").style.display="none";
+function tryPlay(){
+  if(!wantPlay)return;
   const a=el("bgm");
-  if(a){
-    a.volume=0.45;
-    a.play().then(renderMusic).catch(renderMusic);
-  }
+  if(!a)return;
+  a.volume=0.45;
+  a.play().catch(()=>{});
 }
 
 function toggleMusic(){
   const a=el("bgm");
   if(!a)return;
-  if(a.paused){
-    a.volume=0.45;
-    a.play().then(renderMusic).catch(renderMusic);
-  }else{
-    a.pause();
-    renderMusic();
-  }
+  wantPlay=!wantPlay;
+  if(wantPlay){tryPlay();}
+  else{a.pause();}
+  renderMusic();
 }
 
 function showHome(){
@@ -372,3 +346,16 @@ function checkPw(){
   if(el("pi").value.trim()===PASS){unlock();}
   else{
     el("pm").style.color="#991b1b";
+    el("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
+  }
+}
+
+document.addEventListener("pointerdown",e=>{
+  if(e.target!==el("mbtn")&&wantPlay&&el("bgm").paused)tryPlay();
+});
+
+"b1;b2;b3;b4".split(";").forEach(id=>{
+  el(id).addEventListener("click",e=>{
+    e.preventDefault();
+    if(!ok){
+      el("pm").style.color="#991b1b";
