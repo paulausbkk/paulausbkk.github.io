@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -288,8 +287,11 @@ function renderMusic(){
   const isPlaying=a&&!a.paused;
   const btn=el("mbtn");
   btn.classList.toggle("on",isPlaying);
-  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
-  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
+  if(lang==="de"){
+    btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";
+  }else{
+    btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";
+  }
 }
 
 function enterSite(){
@@ -333,42 +335,86 @@ function setLang(l){
   el("lde").classList.toggle("act",l==="de");
   el("len").classList.toggle("act",l==="en");
   if(l==="de"){
-    el("t-tit").innerHTML='<span>🌴 Suche mit <span class="tit-brand">paulausbkk</span></span><span>dein Hotel und dein Flug weltweit ✈️</span>';
-    el("t-fly").textContent="Du willst fliegen? Dann klicke hier ↙️";
-    el("t-rec").textContent="🌟 Unsere Reiseempfehlung die Philippinen";
+    el("t-tit").innerHTML=
+      '<span>🌴 Suche mit <span class="tit-brand">paulausbkk'+
+      '</span></span><span>dein Hotel und dein Flug weltweit ✈️</span>';
+    el("t-fly").textContent=
+      "Du willst fliegen? Dann klicke hier ↙️";
+    el("t-rec").textContent=
+      "🌟 Unsere Reiseempfehlung die Philippinen";
     el("t-zoom").textContent="(Klicken zum Vergrößern)";
-    el("t-uct").textContent="⚠️ Wichtige Hinweise für Nutzer dieser Seite";
-    el("t-unote").textContent="Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte dringend, weil er wichtige Hinweise enthält.";
+    el("t-uct").textContent=
+      "⚠️ Wichtige Hinweise für Nutzer dieser Seite";
+    el("t-unote").textContent=
+      "Immer wenn Sie auf den nachfolgenden Seiten einen solchen "+
+      "roten blinkenden Rahmen sehen, dann lesen Sie den Text "+
+      "darin bitte dringend, weil er wichtige Hinweise enthält.";
     el("pi").placeholder="Passwort...";
     el("pb").textContent="🔓 Freischalten";
-    el("t-bn").textContent="ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.";
-    el("t-sub").textContent="ℹ️ Wichtige Reise-Hinweise (Klicken)";
+    el("t-bn").textContent=
+      "ℹ️ Diese Seite dient als direkter Start- und "+
+      "Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- "+
+      "und Tarifauswahlen erfolgen direkt auf den jeweils "+
+      "verlinkten Anbieterseiten.";
+    el("t-sub").textContent=
+      "ℹ️ Wichtige Reise-Hinweise (Klicken)";
     el("t-s1").textContent="🛂 Einreise & Dokumente weltweit";
-    el("t-p1").textContent="Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online ausfüllen.";
+    el("t-p1").textContent=
+      "Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) "+
+      "und eventuelle Einreise-Registrierungen rechtzeitig vor "+
+      "Abflug online ausfüllen.";
     el("t-s2").textContent="🧳 Flüge & Gepäckregeln";
-    el("t-p2").textContent="Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt auf der gewählten Anbieterseite beim Buchen hinzufügen.";
+    el("t-p2").textContent=
+      "Günstige Basistarife sind oft ohne Aufgabegepäck – bitte "+
+      "direkt auf der gewählten Anbieterseite beim Buchen "+
+      "hinzufügen.";
     el("t-s3").textContent="🏨 Hotelbuchung & Stornierung";
-    el("t-p3").textContent="Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen und lokale Steuern vor Ort achten.";
-    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Schließen");
+    el("t-p3").textContent=
+      "Bei weltweiten Hotelbuchungen auf kostenlose "+
+      "Stornierungsfristen und lokale Steuern vor Ort achten.";
+    "x1;x2;x3;x4".split(";").forEach(function(id){
+      el(id).textContent="✖ Schließen";
+    });
     if(ok)el("pm").textContent="✅ Freigeschaltet";
   }else{
-    el("t-tit").innerHTML='<span>🌴 Search with <span class="tit-brand">paulausbkk</span></span><span>your hotel and flight worldwide ✈️</span>';
+    el("t-tit").innerHTML=
+      '<span>🌴 Search with <span class="tit-brand">paulausbkk'+
+      '</span></span><span>your hotel and flight worldwide ✈️</span>';
     el("t-fly").textContent="Want to fly? Click here ↙️";
-    el("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
+    el("t-rec").textContent=
+      "🌟 Our Travel Recommendation: The Philippines";
     el("t-zoom").textContent="(Click to enlarge)";
-    el("t-uct").textContent="⚠️ Important Notes for Users of this Site";
-    el("t-unote").textContent="Whenever you see a red blinking border like this on the following pages, please read the text inside urgently as it contains important information.";
+    el("t-uct").textContent=
+      "⚠️ Important Notes for Users of this Site";
+    el("t-unote").textContent=
+      "Whenever you see a red blinking border like this on the "+
+      "following pages, please read the text inside urgently as "+
+      "it contains important information.";
     el("pi").placeholder="Password...";
     el("pb").textContent="🔓 Unlock";
-    el("t-bn").textContent="ℹ️ This page serves as a direct starting and configuration point. All bookings, prices, baggage and fare selections take place directly on the linked provider websites.";
+    el("t-bn").textContent=
+      "ℹ️ This page serves as a direct starting and "+
+      "configuration point. All bookings, prices, baggage and "+
+      "fare selections take place directly on the linked "+
+      "provider websites.";
     el("t-sub").textContent="ℹ️ Important Travel Tips (Click)";
     el("t-s1").textContent="🛂 Entry & Documents Worldwide";
-    el("t-p1").textContent="Check passport validity (often at least 6 months) and complete any required online travel registrations before departure.";
+    el("t-p1").textContent=
+      "Check passport validity (often at least 6 months) and "+
+      "complete any required online travel registrations "+
+      "before departure.";
     el("t-s2").textContent="🧳 Flights & Baggage Rules";
-    el("t-p2").textContent="Low basic fares often exclude checked luggage – please add baggage directly on the provider website during booking.";
+    el("t-p2").textContent=
+      "Low basic fares often exclude checked luggage – please "+
+      "add baggage directly on the provider website during "+
+      "booking.";
     el("t-s3").textContent="🏨 Hotel Booking & Cancellation";
-    el("t-p3").textContent="When booking hotels worldwide, pay attention to free cancellation deadlines and local taxes on site.";
-    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Close");
+    el("t-p3").textContent=
+      "When booking hotels worldwide, pay attention to free "+
+      "cancellation deadlines and local taxes on site.";
+    "x1;x2;x3;x4".split(";").forEach(function(id){
+      el(id).textContent="✖ Close";
+    });
     if(ok)el("pm").textContent="✅ Unlocked";
   }
   renderMusic();
@@ -377,25 +423,12 @@ function setLang(l){
 
 function unlock(){
   ok=true;
-  "b1;b2;b3;b4".split(";").forEach(id=>el(id).classList.remove("locked"));
+  "b1;b2;b3;b4".split(";").forEach(function(id){
+    el(id).classList.remove("locked");
+  });
   el("pm").style.color="#15803d";
-  el("pm").textContent=lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
+  el("pm").textContent=
+    lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
   el("pi").style.display="none";
   el("pb").style.display="none";
   renderBtns();
-  try{sessionStorage.setItem("bkk_ok","1");}catch(e){}
-}
-
-function checkPw(){
-  if(el("pi").value.trim()===PASS){unlock();}
-  else{
-    el("pm").style.color="#991b1b";
-    el("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
-  }
-}
-
-"b1;b2;b3;b4".split(";").forEach(id=>{
-  el(id).addEventListener("click",e=>{
-    if(!ok){
-      e.preventDefault();
-      el("pm").style.color="#991b1b";
