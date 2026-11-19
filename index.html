@@ -54,8 +54,16 @@ letter-spacing:.01em}
 }
 .hdr-bot{display:flex;align-items:center;justify-content:center;
 gap:8px;flex-wrap:wrap;width:100%}
-.hdr-tools{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.bgm-player{height:26px;max-width:190px;border-radius:6px}
+.hdr-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
+border-radius:6px;padding:4px 8px;font-size:.72rem;
+font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
+.mbtn:hover,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
+box-shadow:0 0 8px rgba(125,211,252,.5)}
+.mbtn .m-off{display:inline}
+.mbtn .m-on{display:none}
+.mbtn.on .m-off{display:none}
+.mbtn.on .m-on{display:inline}
 .langs{display:flex;gap:4px;align-items:center}
 .flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
 border-radius:6px;padding:4px 8px;font-size:.75rem;
@@ -175,9 +183,11 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="w-card">
 <h2>🌴 Willkommen bei paulausbkk</h2>
 <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<label for="enter-chk" class="w-btn">🎵 Seite mit Musik betreten ➡️</label>
+<label for="enter-chk" class="w-btn" onclick="startBgm()">🎵 Seite mit Musik betreten ➡️</label>
 </div>
 </div>
+
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 
 <div class="hdr">
 <h1 class="tit">
@@ -186,7 +196,10 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </h1>
 <div class="hdr-bot">
 <div class="hdr-tools">
-<audio class="bgm-player" src="musik.mp3" controls loop preload="auto"></audio>
+<button type="button" class="mbtn" id="mbtn" onclick="toggleBgm()">
+<span class="m-on"><span class="de-txt">🎵 Musik An</span><span class="en-txt">🎵 Music On</span></span>
+<span class="m-off"><span class="de-txt">🔇 Musik Aus</span><span class="en-txt">🔇 Music Off</span></span>
+</button>
 <div class="langs">
 <label for="lang-de" class="flg flg-de">🇩🇪</label>
 <label for="lang-en" class="flg flg-en">🇬🇧</label>
@@ -322,6 +335,31 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <script>
 const PASS="paul2026";
 let ok=false;
+
+function syncBgm(){
+  const a=document.getElementById("bgm");
+  const b=document.getElementById("mbtn");
+  if(a&&b)b.classList.toggle("on",!a.paused);
+}
+
+function startBgm(){
+  const a=document.getElementById("bgm");
+  if(a){
+    a.volume=0.45;
+    a.play().then(syncBgm).catch(syncBgm);
+  }
+}
+
+function toggleBgm(){
+  const a=document.getElementById("bgm");
+  if(!a)return;
+  if(a.paused){
+    startBgm();
+  }else{
+    a.pause();
+    syncBgm();
+  }
+}
 
 function isEn(){
   const r=document.getElementById("lang-en");
