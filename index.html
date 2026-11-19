@@ -26,13 +26,22 @@ text-decoration:none;border:none;border-radius:10px;
 padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
 box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
-.hdr{display:flex;flex-direction:column;gap:7px;
-background:#0f2942;padding:9px 14px;border-radius:12px;
-margin-bottom:8px;flex-shrink:0;overflow:hidden;
-box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.tit{font-weight:bold;color:#fff;margin:0;width:100%;
-text-align:center;font-size:clamp(1.05rem,2.1vw,1.65rem);
-line-height:1.15;letter-spacing:.03em}
+.hdr{display:flex;flex-direction:column;gap:8px;
+background:linear-gradient(180deg,#0f2942 0%,#0c2238 100%);
+padding:9px 16px;border-radius:12px;margin-bottom:8px;
+flex-shrink:0;border:1px solid #1e3a8a;
+box-shadow:0 4px 14px rgba(15,41,66,.22)}
+.tit{font-weight:800;color:#f0f9ff;margin:0;width:100%;
+display:flex;justify-content:space-between;align-items:center;
+gap:10px;font-size:clamp(1.05rem,2.15vw,1.62rem);
+line-height:1.15;letter-spacing:.04em;padding-bottom:6px;
+border-bottom:1px solid rgba(125,211,252,.22);
+text-shadow:0 2px 10px rgba(56,189,248,.35)}
+.tit-brand{color:#38bdf8;text-shadow:0 0 12px rgba(56,189,248,.5)}
+@media(max-width:860px){
+.tit{flex-wrap:wrap;justify-content:center;text-align:center;
+letter-spacing:.01em}
+}
 .hdr-bot{display:flex;align-items:center;justify-content:center;
 gap:8px;flex-wrap:wrap;width:100%}
 .hdr-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
@@ -161,7 +170,9 @@ startMusic();">
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">
-🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
+<span>🌴 Suche mit <span class="tit-brand">paulausbkk</span></span>
+<span>dein Hotel und dein Flug weltweit ✈️</span>
+</h1>
 <div class="hdr-bot">
 <div class="hdr-tools">
 <button type="button" class="mbtn" id="mbtn"
@@ -325,7 +336,7 @@ function setLang(l){
   el("lde").classList.toggle("act",l==="de");
   el("len").classList.toggle("act",l==="en");
   if(l==="de"){
-    el("t-tit").textContent="🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit";
+    el("t-tit").innerHTML='<span>🌴 Suche mit <span class="tit-brand">paulausbkk</span></span><span>dein Hotel und dein Flug weltweit ✈️</span>';
     el("t-fly").textContent="Du willst fliegen? Dann klicke hier ↙️";
     el("t-rec").textContent="🌟 Unsere Reiseempfehlung die Philippinen";
     el("t-zoom").textContent="(Klicken zum Vergrößern)";
@@ -344,7 +355,7 @@ function setLang(l){
     "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Schließen");
     if(ok)el("pm").textContent="✅ Freigeschaltet";
   }else{
-    el("t-tit").textContent="🌴 Search hotel and flight worldwide with paulausbkk";
+    el("t-tit").innerHTML='<span>🌴 Search with <span class="tit-brand">paulausbkk</span></span><span>your hotel and flight worldwide ✈️</span>';
     el("t-fly").textContent="Want to fly? Click here ↙️";
     el("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
     el("t-zoom").textContent="(Click to enlarge)";
@@ -392,13 +403,3 @@ function checkPw(){
     if(!ok){
       e.preventDefault();
       el("pm").style.color="#991b1b";
-      el("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
-      el("pi").focus();
-    }
-  });
-});
-
-try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
-</script>
-</body>
-</html>
