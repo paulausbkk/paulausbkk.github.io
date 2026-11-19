@@ -91,11 +91,32 @@ html,body{height:auto}
 .bento{grid-template-columns:1fr;grid-template-rows:auto}
 .box.wide{grid-column:span 1}
 }
+@keyframes wingDayNight{
+0%,100%{filter:brightness(1.14) contrast(1.04) saturate(1.12)}
+50%{filter:brightness(0.58) contrast(1.16) saturate(1.25) hue-rotate(-12deg)}
+}
+@keyframes lisSunCycle{
+0%,100%{filter:brightness(1.12) saturate(1.15) sepia(0.05) hue-rotate(0deg)}
+22%{filter:brightness(1.02) saturate(1.55) sepia(0.35) hue-rotate(-12deg)}
+40%{filter:brightness(0.80) saturate(2.15) sepia(0.58) hue-rotate(-24deg)}
+55%{filter:brightness(0.42) saturate(1.45) sepia(0.30) hue-rotate(195deg)}
+72%{filter:brightness(0.84) saturate(1.95) sepia(0.50) hue-rotate(-18deg)}
+88%{filter:brightness(1.16) saturate(1.40) sepia(0.22) hue-rotate(-4deg)}
+}
+@keyframes sunTint{
+0%,100%{opacity:0}
+25%{opacity:.75;background:linear-gradient(180deg,rgba(253,224,71,.22) 0%,rgba(249,115,22,.38) 65%,rgba(154,52,18,.48) 100%)}
+42%{opacity:1;background:linear-gradient(180deg,rgba(251,146,60,.28) 0%,rgba(220,38,38,.52) 60%,rgba(124,45,18,.70) 100%)}
+56%{opacity:.95;background:linear-gradient(180deg,rgba(15,23,42,.58) 0%,rgba(30,58,138,.48) 65%,rgba(15,23,42,.75) 100%)}
+74%{opacity:.90;background:linear-gradient(180deg,rgba(254,240,138,.28) 0%,rgba(249,115,22,.46) 60%,rgba(180,83,9,.52) 100%)}
+90%{opacity:.35;background:linear-gradient(180deg,rgba(254,249,195,.20) 0%,rgba(251,146,60,.20) 100%)}
+}
 .pic{position:relative;border-radius:10px;overflow:hidden;
 min-height:135px;display:flex;align-items:stretch;padding:12px 14px;
 background-color:#0f2942;background-image:url("Flügel.jpg");
 background-position:center 22%;background-size:118%;
-background-repeat:no-repeat}
+background-repeat:no-repeat;
+animation:wingDayNight 14s infinite ease-in-out}
 .pic::before{content:"";position:absolute;inset:0;
 background:linear-gradient(180deg,rgba(15,41,66,.72) 0%,
 rgba(15,41,66,.18) 50%,rgba(15,41,66,.75) 100%)}
@@ -131,8 +152,11 @@ display:block;text-decoration:none;cursor:zoom-in}
 .gitem.tall{grid-row:span 3}
 .gitem img{width:100%;height:100%;object-fit:cover;
 object-position:center;display:block;transition:.25s}
-.gitem.tall img{object-position:center 15%}
-.gitem:hover img{transform:scale(1.04);filter:brightness(1.06)}
+.gitem.tall img{object-position:center 15%;
+animation:lisSunCycle 18s infinite ease-in-out}
+.sun-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;
+mix-blend-mode:multiply;animation:sunTint 18s infinite ease-in-out}
+.gitem:hover img{transform:scale(1.04)}
 .gnum{position:absolute;top:5px;left:5px;z-index:2;
 background:rgba(15,41,66,.85);color:#fff;font-weight:bold;
 font-size:.75rem;padding:2px 7px;border-radius:5px;
@@ -180,248 +204,3 @@ z-index:999;padding:20px}
 .lb img{max-width:94vw;max-height:88vh;border-radius:10px;
 border:2px solid #7dd3fc;box-shadow:0 10px 30px rgba(0,0,0,.6);
 object-fit:contain}
-.lb-bg{position:absolute;inset:0;cursor:zoom-out}
-.lb-x{position:fixed;top:16px;right:20px;z-index:1001;
-background:#0284c7;color:#fff;text-decoration:none;
-font-weight:bold;padding:8px 14px;border-radius:8px;
-border:1px solid #7dd3fc;font-size:.9rem}
-</style>
-</head>
-<body>
-<input type="checkbox" id="enter-chk" class="state-inp">
-<input type="radio" name="lang" id="lang-de" class="state-inp" checked>
-<input type="radio" name="lang" id="lang-en" class="state-inp">
-
-<div class="welcome">
-<div class="w-card">
-<h2>🌴 Willkommen bei paulausbkk</h2>
-<p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<label for="enter-chk" class="w-btn" onclick="startBgm()">🎵 Seite mit Musik betreten ➡️</label>
-</div>
-</div>
-
-<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
-
-<div class="hdr">
-<h1 class="tit">
-<span>🌴 <span class="de-txt">Suche mit</span><span class="en-txt">Search with</span> <span class="tit-brand">paulausbkk</span></span>
-<span><span class="de-txt">dein Hotel und dein Flug weltweit ✈️</span><span class="en-txt">your hotel and flight worldwide ✈️</span></span>
-</h1>
-<div class="hdr-bot">
-<div class="hdr-tools">
-<button type="button" class="mbtn" id="mbtn" onclick="toggleBgm()">
-<span class="m-on"><span class="de-txt">🎵 Musik An</span><span class="en-txt">🎵 Music On</span></span>
-<span class="m-off"><span class="de-txt">🔇 Musik Aus</span><span class="en-txt">🔇 Music Off</span></span>
-</button>
-<div class="langs">
-<label for="lang-de" class="flg flg-de">🇩🇪</label>
-<label for="lang-en" class="flg flg-en">🇬🇧</label>
-</div>
-</div>
-<div class="cp">
-<a id="b1" href="/reise-alert/meine-hotelsuche.html" target="_blank" rel="noopener" class="seg locked">
-<span class="lock-ico">🔒 </span><span class="de-txt">🏨 Hotelsuche</span><span class="en-txt">🏨 Hotels</span>
-</a>
-<a id="b2" href="/reise-alert/meine-flugbuchungen.html" target="_blank" rel="noopener" class="seg locked">
-<span class="lock-ico">🔒 </span><span class="de-txt">📋 Flugbuchungen</span><span class="en-txt">📋 Bookings</span>
-</a>
-<a id="b3" href="/reise-alert/index.html" target="_blank" rel="noopener" class="seg locked">
-<span class="lock-ico">🔒 </span><span class="de-txt">✈️ Zur Flugsuche ➡️</span><span class="en-txt">✈️ Flight Search ➡️</span>
-</a>
-</div>
-</div>
-</div>
-
-<div class="bento">
-<div class="box wide">
-<div class="pic">
-<div class="ptxt">
-<h2>
-<span class="de-txt"><span class="fly-wide">Du willst fliegen? Dann klicke hier</span></span>
-<span class="en-txt"><span class="fly-wide">Want to fly? Click here</span></span>
-</h2>
-<div class="fly-arrow">↙️</div>
-<a id="b4" href="/reise-alert/index.html" target="_blank" rel="noopener" class="cta locked">
-<span class="lock-ico">🔒 </span><span class="de-txt">✈️ Flugkonfiguration öffnen ➡️</span><span class="en-txt">✈️ Open Flight Search ➡️</span>
-</a>
-</div>
-</div>
-</div>
-
-<div class="box">
-<div class="ct">
-<span>
-<span class="de-txt">🌟 Unsere Reiseempfehlung die Philippinen</span>
-<span class="en-txt">🌟 Our Travel Recommendation: The Philippines</span>
-</span>
-<span class="ct-sub">
-<span class="de-txt">(Klicken zum Vergrößern)</span>
-<span class="en-txt">(Click to enlarge)</span>
-</span>
-</div>
-<div class="gal-grid">
-<a href="#f1" class="gitem tall"><span class="gnum">1</span>
-<img src="LiS.jpg" alt="Empfehlung 1"></a>
-<a href="#f2" class="gitem sm"><span class="gnum">2</span>
-<img src="Strand.jpg" alt="Empfehlung 2"></a>
-<a href="#f3" class="gitem sm"><span class="gnum">3</span>
-<img src="Strand2.jpg" alt="Empfehlung 3"></a>
-<a href="#f4" class="gitem sm"><span class="gnum">4</span>
-<img src="20250205_181003.jpg" alt="Empfehlung 4"></a>
-</div>
-</div>
-
-<div class="box">
-<div class="user-alert">
-<div class="user-ct">
-<span class="de-txt">⚠️ Wichtige Hinweise für Nutzer dieser Seite</span>
-<span class="en-txt">⚠️ Important Notes for Users of this Site</span>
-</div>
-<div class="note-space">
-<span class="de-txt">Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte dringend, weil er wichtige Hinweise enthält.</span>
-<span class="en-txt">Whenever you see a red blinking border like this on the following pages, please read the text inside urgently as it contains important information.</span>
-</div>
-<div class="pw-row">
-<span class="pw-msg" id="pm"></span>
-<input type="password" class="pw-inp" id="pi" placeholder="Passwort..." onkeydown="if(event.key==='Enter')checkPw()">
-<button type="button" class="pw-btn" id="pb" onclick="checkPw()">
-<span class="de-txt">🔓 Freischalten</span><span class="en-txt">🔓 Unlock</span>
-</button>
-</div>
-</div>
-
-<div class="bottom-block">
-<div class="bn">
-<span class="de-txt">ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.</span>
-<span class="en-txt">ℹ️ This page serves as a direct starting and configuration point. All bookings, prices, baggage and fare selections take place directly on the linked provider websites.</span>
-</div>
-<div class="sub-ct">
-<span class="de-txt">ℹ️ Wichtige Reise-Hinweise (Klicken)</span>
-<span class="en-txt">ℹ️ Important Travel Tips (Click)</span>
-</div>
-<details>
-<summary>
-<span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-<span class="en-txt">🛂 Entry & Documents Worldwide</span>
-</summary>
-<p>
-<span class="de-txt">Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online ausfüllen.</span>
-<span class="en-txt">Check passport validity (often at least 6 months) and complete any required online travel registrations before departure.</span>
-</p>
-</details>
-<details>
-<summary>
-<span class="de-txt">🧳 Flüge & Gepäckregeln</span>
-<span class="en-txt">🧳 Flights & Baggage Rules</span>
-</summary>
-<p>
-<span class="de-txt">Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt auf der gewählten Anbieterseite beim Buchen hinzufügen.</span>
-<span class="en-txt">Low basic fares often exclude checked luggage – please add baggage directly on the provider website during booking.</span>
-</p>
-</details>
-<details>
-<summary>
-<span class="de-txt">🏨 Hotelbuchung & Stornierung</span>
-<span class="en-txt">🏨 Hotel Booking & Cancellation</span>
-</summary>
-<p>
-<span class="de-txt">Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen und lokale Steuern vor Ort achten.</span>
-<span class="en-txt">When booking hotels worldwide, pay attention to free cancellation deadlines and local taxes on site.</span>
-</p>
-</details>
-</div>
-</div>
-</div>
-
-<div id="f1" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a>
-<img src="LiS.jpg" alt="1"></div>
-<div id="f2" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a>
-<img src="Strand.jpg" alt="2"></div>
-<div id="f3" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a>
-<img src="Strand2.jpg" alt="3"></div>
-<div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a>
-<img src="20250205_181003.jpg" alt="4"></div>
-
-<script>
-const PASS="paul2026";
-let ok=false;
-
-function syncBgm(){
-  const a=document.getElementById("bgm");
-  const b=document.getElementById("mbtn");
-  if(a&&b)b.classList.toggle("on",!a.paused);
-}
-
-function startBgm(){
-  const a=document.getElementById("bgm");
-  if(a){
-    a.volume=0.45;
-    a.play().then(syncBgm).catch(syncBgm);
-  }
-}
-
-function toggleBgm(){
-  const a=document.getElementById("bgm");
-  if(!a)return;
-  if(a.paused){
-    startBgm();
-  }else{
-    a.pause();
-    syncBgm();
-  }
-}
-
-function isEn(){
-  const r=document.getElementById("lang-en");
-  return r&&r.checked;
-}
-
-function unlock(){
-  ok=true;
-  document.body.classList.add("unlocked");
-  ["b1","b2","b3","b4"].forEach(function(id){
-    document.getElementById(id).classList.remove("locked");
-  });
-  const pm=document.getElementById("pm");
-  pm.style.color="#15803d";
-  pm.textContent=isEn()?"✅ Unlocked":"✅ Freigeschaltet";
-  document.getElementById("pi").style.display="none";
-  document.getElementById("pb").style.display="none";
-  try{sessionStorage.setItem("pab_ok","1");}catch(e){}
-}
-
-function checkPw(){
-  const val=(document.getElementById("pi").value||"").trim();
-  if(val===PASS){
-    unlock();
-  }else{
-    const pm=document.getElementById("pm");
-    pm.style.color="#991b1b";
-    pm.textContent=isEn()?"❌ Wrong password":"❌ Falsches Passwort";
-  }
-}
-
-["b1","b2","b3","b4"].forEach(function(id){
-  document.getElementById(id).addEventListener("click",function(e){
-    if(!ok){
-      e.preventDefault();
-      const pm=document.getElementById("pm");
-      pm.style.color="#991b1b";
-      pm.textContent=isEn()
-        ?"🔒 Please enter password below first"
-        :"🔒 Bitte erst unten Passwort eingeben";
-      document.getElementById("pi").focus();
-    }
-  });
-});
-
-try{
-  if(sessionStorage.getItem("pab_ok")==="1")unlock();
-}catch(e){}
-</script>
-</body>
-</html>
