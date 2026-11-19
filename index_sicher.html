@@ -11,21 +11,34 @@ background:linear-gradient(180deg,#dbeafe 0%,#f0f9ff 100%);
 height:100vh;min-height:100vh;font-family:sans-serif;
 color:var(--t);box-sizing:border-box;display:flex;
 flex-direction:column;overflow-x:hidden}
+.welcome{position:fixed;inset:0;background:rgba(15,41,66,.88);
+display:flex;align-items:center;justify-content:center;
+z-index:2000;padding:20px;backdrop-filter:blur(4px)}
+.w-card{background:#fff;border:2px solid #7dd3fc;border-radius:16px;
+padding:26px 30px;text-align:center;max-width:400px;
+box-shadow:0 12px 32px rgba(0,0,0,.45)}
+.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
+.w-card p{margin:0 0 18px 0;color:#334155;font-size:.92rem;
+line-height:1.45}
+.w-btn{background:#0284c7;color:#fff;border:none;border-radius:10px;
+padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
+box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
+.w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 .hdr{display:flex;justify-content:space-between;align-items:center;
 background:#0f2942;padding:9px 14px;border-radius:12px;
 margin-bottom:10px;flex-wrap:nowrap;gap:10px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
+.hdr-l{display:flex;align-items:center;gap:10px;min-width:0}
 .tit{font-weight:bold;color:#fff;font-size:1rem;margin:0;
-white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hdr-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.langs{display:flex;gap:5px;align-items:center}
-.flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:4px 8px;font-size:.78rem;
+white-space:nowrap}
+.langs{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.flg,.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
+border-radius:6px;padding:4px 8px;font-size:.76rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
-.flg:hover,.flg.act{background:#0284c7;border-color:#7dd3fc;
+.flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:6px;align-items:center}
-.seg{font-size:.74rem;padding:6px 10px;border-radius:6px;
+.cp{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.seg{font-size:.76rem;padding:6px 10px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
 white-space:nowrap}
@@ -38,8 +51,8 @@ padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
 display:flex;flex-direction:column;height:100%;
 box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
-@media(max-width:860px){
-.hdr{flex-wrap:wrap}
+@media(max-width:1050px){
+.hdr,.hdr-l{flex-wrap:wrap}
 .tit{white-space:normal}
 }
 @media(max-width:740px){
@@ -131,18 +144,27 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </style>
 </head>
 <body>
+<div class="welcome" id="wov">
+<div class="w-card">
+<h2>🌴 Willkommen bei paulausbkk</h2>
+<p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
+<button type="button" class="w-btn" onclick="enterSite()">🎵 Seite mit Musik betreten ➡️</button>
+</div>
+</div>
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
+<div class="hdr-l">
 <h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
-<div class="hdr-r">
+<button type="button" class="mbtn on" id="mbtn" onclick="toggleMusic()">🎵 Musik An</button>
 <div class="langs">
-<button type="button" class="flg act" id="lde">🇩🇪 DE</button>
-<button type="button" class="flg" id="len">🇬🇧 EN</button>
+<button type="button" class="flg act" id="lde" onclick="setLang('de')">🇩🇪</button>
+<button type="button" class="flg" id="len" onclick="setLang('en')">🇬🇧</button>
+</div>
 </div>
 <div class="cp">
-<a id="b1" href="/reise-alert/meine-hotelsuche.html" class="seg locked">🔒 Hotelsuche</a>
-<a id="b2" href="/reise-alert/meine-flugbuchungen.html" class="seg locked">🔒 Flugbuchungen</a>
-<a id="b3" href="/reise-alert/index.html" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
-</div>
+<a id="b1" href="/reise-alert/meine-hotelsuche.html" target="_blank" rel="noopener" class="seg locked">🔒 Hotelsuche</a>
+<a id="b2" href="/reise-alert/meine-flugbuchungen.html" target="_blank" rel="noopener" class="seg locked">🔒 Flugbuchungen</a>
+<a id="b3" href="/reise-alert/index.html" target="_blank" rel="noopener" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
 </div>
 </div>
 <div class="bento">
@@ -150,7 +172,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="pic">
 <div class="ptxt">
 <h2 id="t-fly">Du willst fliegen? Dann klicke hier ↙️</h2>
-<a id="b4" href="/reise-alert/index.html" class="cta locked">🔒 Flugkonfiguration öffnen ➡️</a>
+<a id="b4" href="/reise-alert/index.html" target="_blank" rel="noopener" class="cta locked">🔒 Flugkonfiguration öffnen ➡️</a>
 </div>
 </div>
 </div>
@@ -175,8 +197,8 @@ einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text
 darin bitte dringend, weil er wichtige Hinweise enthält.</div>
 <div class="pw-row">
 <span class="pw-msg" id="pm"></span>
-<input type="password" class="pw-inp" id="pi" placeholder="Passwort...">
-<button type="button" class="pw-btn" id="pb">🔓 Freischalten</button>
+<input type="password" class="pw-inp" id="pi" placeholder="Passwort..." onkeydown="if(event.key==='Enter')checkPw()">
+<button type="button" class="pw-btn" id="pb" onclick="checkPw()">🔓 Freischalten</button>
 </div>
 </div>
 <div class="bottom-block">
@@ -213,101 +235,129 @@ und lokale Steuern vor Ort achten.</p>
 <div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
 <a href="#_" class="lb-x" id="x4">✖ Schließen</a><img src="20250205_181003.jpg" alt="4"></div>
 <script>
-const $=id=>document.getElementById(id);
 const PASS="paul2026";
 let ok=false,lang="de";
+
+function el(id){return document.getElementById(id);}
+
+function renderMusic(){
+  const a=el("bgm");
+  const isPlaying=a&&!a.paused;
+  const btn=el("mbtn");
+  btn.classList.toggle("on",isPlaying);
+  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
+}
+
+function enterSite(){
+  el("wov").style.display="none";
+  const a=el("bgm");
+  if(a){
+    a.volume=0.45;
+    a.play().then(renderMusic).catch(renderMusic);
+  }
+}
+
+function toggleMusic(){
+  const a=el("bgm");
+  if(!a)return;
+  if(a.paused){
+    a.volume=0.45;
+    a.play().then(renderMusic).catch(renderMusic);
+  }else{
+    a.pause();
+    renderMusic();
+  }
+}
 
 function renderBtns(){
   const p=ok?"":"🔒 ";
   if(lang==="de"){
-    $("b1").textContent=p+"🏨 Hotelsuche";
-    $("b2").textContent=p+"📋 Flugbuchungen";
-    $("b3").textContent=p+"✈️ Zur Flugsuche ➡️";
-    $("b4").textContent=p+"✈️ Flugkonfiguration öffnen ➡️";
+    el("b1").textContent=p+"🏨 Hotelsuche";
+    el("b2").textContent=p+"📋 Flugbuchungen";
+    el("b3").textContent=p+"✈️ Zur Flugsuche ➡️";
+    el("b4").textContent=p+"✈️ Flugkonfiguration öffnen ➡️";
   }else{
-    $("b1").textContent=p+"🏨 Hotels";
-    $("b2").textContent=p+"📋 Bookings";
-    $("b3").textContent=p+"✈️ Flight Search ➡️";
-    $("b4").textContent=p+"✈️ Open Flight Search ➡️";
+    el("b1").textContent=p+"🏨 Hotels";
+    el("b2").textContent=p+"📋 Bookings";
+    el("b3").textContent=p+"✈️ Flight Search ➡️";
+    el("b4").textContent=p+"✈️ Open Flight Search ➡️";
   }
 }
 
 function setLang(l){
   lang=l;
-  $("lde").classList.toggle("act",l==="de");
-  $("len").classList.toggle("act",l==="en");
+  el("lde").classList.toggle("act",l==="de");
+  el("len").classList.toggle("act",l==="en");
   if(l==="de"){
-    $("t-tit").textContent="🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit";
-    $("t-fly").textContent="Du willst fliegen? Dann klicke hier ↙️";
-    $("t-rec").textContent="🌟 Unsere Reiseempfehlung die Philippinen";
-    $("t-zoom").textContent="(Klicken zum Vergrößern)";
-    $("t-uct").textContent="⚠️ Wichtige Hinweise für Nutzer dieser Seite";
-    $("t-unote").textContent="Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte dringend, weil er wichtige Hinweise enthält.";
-    $("pi").placeholder="Passwort...";
-    $("pb").textContent="🔓 Freischalten";
-    $("t-bn").textContent="ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.";
-    $("t-sub").textContent="ℹ️ Wichtige Reise-Hinweise (Klicken)";
-    $("t-s1").textContent="🛂 Einreise & Dokumente weltweit";
-    $("t-p1").textContent="Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online ausfüllen.";
-    $("t-s2").textContent="🧳 Flüge & Gepäckregeln";
-    $("t-p2").textContent="Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt auf der gewählten Anbieterseite beim Buchen hinzufügen.";
-    $("t-s3").textContent="🏨 Hotelbuchung & Stornierung";
-    $("t-p3").textContent="Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen und lokale Steuern vor Ort achten.";
-    "x1;x2;x3;x4".split(";").forEach(id=>$(id).textContent="✖ Schließen");
-    if(ok)$("pm").textContent="✅ Freigeschaltet";
+    el("t-tit").textContent="🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit";
+    el("t-fly").textContent="Du willst fliegen? Dann klicke hier ↙️";
+    el("t-rec").textContent="🌟 Unsere Reiseempfehlung die Philippinen";
+    el("t-zoom").textContent="(Klicken zum Vergrößern)";
+    el("t-uct").textContent="⚠️ Wichtige Hinweise für Nutzer dieser Seite";
+    el("t-unote").textContent="Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte dringend, weil er wichtige Hinweise enthält.";
+    el("pi").placeholder="Passwort...";
+    el("pb").textContent="🔓 Freischalten";
+    el("t-bn").textContent="ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.";
+    el("t-sub").textContent="ℹ️ Wichtige Reise-Hinweise (Klicken)";
+    el("t-s1").textContent="🛂 Einreise & Dokumente weltweit";
+    el("t-p1").textContent="Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online ausfüllen.";
+    el("t-s2").textContent="🧳 Flüge & Gepäckregeln";
+    el("t-p2").textContent="Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt auf der gewählten Anbieterseite beim Buchen hinzufügen.";
+    el("t-s3").textContent="🏨 Hotelbuchung & Stornierung";
+    el("t-p3").textContent="Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen und lokale Steuern vor Ort achten.";
+    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Schließen");
+    if(ok)el("pm").textContent="✅ Freigeschaltet";
   }else{
-    $("t-tit").textContent="🌴 Search hotel and flight worldwide with paulausbkk";
-    $("t-fly").textContent="Want to fly? Click here ↙️";
-    $("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
-    $("t-zoom").textContent="(Click to enlarge)";
-    $("t-uct").textContent="⚠️ Important Notes for Users of this Site";
-    $("t-unote").textContent="Whenever you see a red blinking border like this on the following pages, please read the text inside urgently as it contains important information.";
-    $("pi").placeholder="Password...";
-    $("pb").textContent="🔓 Unlock";
-    $("t-bn").textContent="ℹ️ This page serves as a direct starting and configuration point. All bookings, prices, baggage and fare selections take place directly on the linked provider websites.";
-    $("t-sub").textContent="ℹ️ Important Travel Tips (Click)";
-    $("t-s1").textContent="🛂 Entry & Documents Worldwide";
-    $("t-p1").textContent="Check passport validity (often at least 6 months) and complete any required online travel registrations before departure.";
-    $("t-s2").textContent="🧳 Flights & Baggage Rules";
-    $("t-p2").textContent="Low basic fares often exclude checked luggage – please add baggage directly on the provider website during booking.";
-    $("t-s3").textContent="🏨 Hotel Booking & Cancellation";
-    $("t-p3").textContent="When booking hotels worldwide, pay attention to free cancellation deadlines and local taxes on site.";
-    "x1;x2;x3;x4".split(";").forEach(id=>$(id).textContent="✖ Close");
-    if(ok)$("pm").textContent="✅ Unlocked";
+    el("t-tit").textContent="🌴 Search hotel and flight worldwide with paulausbkk";
+    el("t-fly").textContent="Want to fly? Click here ↙️";
+    el("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
+    el("t-zoom").textContent="(Click to enlarge)";
+    el("t-uct").textContent="⚠️ Important Notes for Users of this Site";
+    el("t-unote").textContent="Whenever you see a red blinking border like this on the following pages, please read the text inside urgently as it contains important information.";
+    el("pi").placeholder="Password...";
+    el("pb").textContent="🔓 Unlock";
+    el("t-bn").textContent="ℹ️ This page serves as a direct starting and configuration point. All bookings, prices, baggage and fare selections take place directly on the linked provider websites.";
+    el("t-sub").textContent="ℹ️ Important Travel Tips (Click)";
+    el("t-s1").textContent="🛂 Entry & Documents Worldwide";
+    el("t-p1").textContent="Check passport validity (often at least 6 months) and complete any required online travel registrations before departure.";
+    el("t-s2").textContent="🧳 Flights & Baggage Rules";
+    el("t-p2").textContent="Low basic fares often exclude checked luggage – please add baggage directly on the provider website during booking.";
+    el("t-s3").textContent="🏨 Hotel Booking & Cancellation";
+    el("t-p3").textContent="When booking hotels worldwide, pay attention to free cancellation deadlines and local taxes on site.";
+    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Close");
+    if(ok)el("pm").textContent="✅ Unlocked";
   }
+  renderMusic();
   renderBtns();
 }
 
 function unlock(){
   ok=true;
-  "b1;b2;b3;b4".split(";").forEach(id=>$(id).classList.remove("locked"));
-  $("pm").style.color="#15803d";
-  $("pm").textContent=lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
-  $("pi").style.display="none";
-  $("pb").style.display="none";
+  "b1;b2;b3;b4".split(";").forEach(id=>el(id).classList.remove("locked"));
+  el("pm").style.color="#15803d";
+  el("pm").textContent=lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
+  el("pi").style.display="none";
+  el("pb").style.display="none";
   renderBtns();
   try{sessionStorage.setItem("bkk_ok","1");}catch(e){}
 }
 
 function checkPw(){
-  if($("pi").value.trim()===PASS){unlock();}
+  if(el("pi").value.trim()===PASS){unlock();}
   else{
-    $("pm").style.color="#991b1b";
-    $("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
+    el("pm").style.color="#991b1b";
+    el("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
   }
 }
 
-$("lde").addEventListener("click",()=>setLang("de"));
-$("len").addEventListener("click",()=>setLang("en"));
-$("pb").addEventListener("click",checkPw);
-$("pi").addEventListener("keydown",e=>{if(e.key==="Enter")checkPw();});
 "b1;b2;b3;b4".split(";").forEach(id=>{
-  $(id).addEventListener("click",e=>{
+  el(id).addEventListener("click",e=>{
     if(!ok){
       e.preventDefault();
-      $("pm").style.color="#991b1b";
-      $("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
-      $("pi").focus();
+      el("pm").style.color="#991b1b";
+      el("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
+      el("pi").focus();
     }
   });
 });
