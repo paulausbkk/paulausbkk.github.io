@@ -91,14 +91,43 @@ html,body{height:auto}
 .bento{grid-template-columns:1fr;grid-template-rows:auto}
 .box.wide{grid-column:span 1}
 }
+@keyframes wingShift{
+0%,100%{filter:brightness(1.02) saturate(1.04) hue-rotate(0deg)}
+35%{filter:brightness(1.07) saturate(1.24) sepia(.14) hue-rotate(-8deg)}
+70%{filter:brightness(.97) saturate(1.18) hue-rotate(10deg)}
+}
+@keyframes wingGlow{
+0%,100%{opacity:.12}
+40%{opacity:.34}
+75%{opacity:.22}
+}
+@keyframes sunsetPhoto{
+0%,100%{filter:brightness(1.03) saturate(1.06) contrast(1.02) sepia(.04)}
+32%{filter:brightness(1.02) saturate(1.28) contrast(1.05) sepia(.22) hue-rotate(-10deg)}
+62%{filter:brightness(.92) saturate(1.38) contrast(1.09) sepia(.34) hue-rotate(-18deg)}
+82%{filter:brightness(.86) saturate(1.22) contrast(1.07) sepia(.24) hue-rotate(-8deg)}
+}
+@keyframes sunsetWarmth{
+0%,100%{opacity:0}
+35%{opacity:.22}
+62%{opacity:.38}
+82%{opacity:.26}
+}
 .pic{position:relative;border-radius:10px;overflow:hidden;
 min-height:135px;display:flex;align-items:stretch;padding:12px 14px;
-background-color:#0f2942;background-image:url("Flügel.jpg");
-background-position:center 22%;background-size:118%;
-background-repeat:no-repeat}
-.pic::before{content:"";position:absolute;inset:0;
+background-color:#0f2942}
+.pic-bg{position:absolute;inset:0;z-index:0;
+background-image:url("Flügel.jpg");background-position:center 22%;
+background-size:118%;background-repeat:no-repeat;
+animation:wingShift 16s ease-in-out infinite}
+.pic::before{content:"";position:absolute;inset:0;z-index:1;
 background:linear-gradient(180deg,rgba(15,41,66,.72) 0%,
-rgba(15,41,66,.18) 50%,rgba(15,41,66,.75) 100%)}
+rgba(15,41,66,.16) 50%,rgba(15,41,66,.75) 100%)}
+.pic::after{content:"";position:absolute;inset:0;z-index:1;
+pointer-events:none;
+background:radial-gradient(circle at 78% 35%,rgba(251,146,60,.45),
+rgba(244,63,94,.2) 45%,transparent 75%);
+animation:wingGlow 16s ease-in-out infinite}
 .ptxt{position:relative;z-index:2;color:#fff;width:100%;
 display:flex;flex-direction:column;justify-content:space-between;
 align-items:flex-start;gap:4px}
@@ -130,9 +159,15 @@ border:1px solid #bae6fd;min-height:0;background:#e0f2fe;
 display:block;text-decoration:none;cursor:zoom-in}
 .gitem.tall{grid-row:span 3}
 .gitem img{width:100%;height:100%;object-fit:cover;
-object-position:center;display:block;transition:.25s}
-.gitem.tall img{object-position:center 15%}
-.gitem:hover img{transform:scale(1.04);filter:brightness(1.06)}
+object-position:center;display:block;transition:transform .35s ease}
+.gitem.tall img{object-position:center 15%;
+animation:sunsetPhoto 18s ease-in-out infinite}
+.gitem.tall::after{content:"";position:absolute;inset:0;z-index:1;
+pointer-events:none;mix-blend-mode:soft-light;
+background:linear-gradient(180deg,rgba(251,146,60,.55) 0%,
+rgba(234,88,12,.45) 48%,rgba(124,45,18,.55) 100%);
+animation:sunsetWarmth 18s ease-in-out infinite}
+.gitem:hover img{transform:scale(1.04)}
 .gnum{position:absolute;top:5px;left:5px;z-index:2;
 background:rgba(15,41,66,.85);color:#fff;font-weight:bold;
 font-size:.75rem;padding:2px 7px;border-radius:5px;
@@ -182,11 +217,7 @@ border:2px solid #7dd3fc;box-shadow:0 10px 30px rgba(0,0,0,.6);
 object-fit:contain}
 .lb-bg{position:absolute;inset:0;cursor:zoom-out}
 .lb-x{position:fixed;top:16px;right:20px;z-index:1001;
-background:#0284c7;color:#fff;text-decoration:none;
-font-weight:bold;padding:8px 14px;border-radius:8px;
-border:1px solid #7dd3fc;font-size:.9rem}
-</style>
-</head>
+```html
 <body>
 <input type="checkbox" id="enter-chk" class="state-inp">
 <input type="radio" name="lang" id="lang-de" class="state-inp" checked>
@@ -235,6 +266,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="bento">
 <div class="box wide">
 <div class="pic">
+<div class="pic-bg"></div>
 <div class="ptxt">
 <h2>
 <span class="de-txt"><span class="fly-wide">Du willst fliegen? Dann klicke hier</span></span>
