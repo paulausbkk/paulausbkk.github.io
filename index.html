@@ -154,13 +154,13 @@ background:#0284c7;color:#fff;text-decoration:none;
 font-weight:bold;padding:8px 14px;border-radius:8px;
 border:1px solid #7dd3fc;font-size:.9rem}
 </style>
-</head>
 <body>
 <div class="welcome" id="wov">
 <div class="w-card">
 <h2>🌴 Willkommen bei paulausbkk</h2>
 <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<button type="button" class="w-btn" onclick="enterSite()">
+<button type="button" class="w-btn"
+onclick="document.getElementById('wov').style.display='none';enterSite();">
 🎵 Seite mit Musik betreten ➡️</button>
 </div>
 </div>
@@ -288,11 +288,8 @@ function renderMusic(){
   const isPlaying=a&&!a.paused;
   const btn=el("mbtn");
   btn.classList.toggle("on",isPlaying);
-  if(lang==="de"){
-    btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";
-  }else{
-    btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";
-  }
+  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
+  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
 }
 
 function enterSite(){
