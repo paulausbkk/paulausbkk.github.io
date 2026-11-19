@@ -101,14 +101,18 @@ background:linear-gradient(180deg,rgba(15,41,66,.72) 0%,
 rgba(15,41,66,.18) 50%,rgba(15,41,66,.75) 100%)}
 .ptxt{position:relative;z-index:2;color:#fff;width:100%;
 display:flex;flex-direction:column;justify-content:space-between;
-align-items:flex-start;gap:14px}
+align-items:flex-start;gap:4px}
 .ptxt h2{margin:0;font-size:clamp(1.2rem,2.3vw,1.8rem);
 font-weight:800;letter-spacing:.05em;line-height:1.15;
 text-shadow:0 2px 8px rgba(0,0,0,.55)}
 .fly-wide{display:inline-block;transform:scaleX(1.12);
-transform-origin:left center;margin-right:2.6rem}
+transform-origin:left center}
+.fly-arrow{font-size:1.55rem;line-height:1;
+margin:2px 0 2px 175px;
+filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
 @media(max-width:740px){
-.fly-wide{transform:none;margin-right:0}
+.fly-wide{transform:none}
+.fly-arrow{margin-left:135px}
 }
 .cta{display:inline-block;background:#0284c7;color:#fff;
 font-weight:bold;text-decoration:none;padding:8px 16px;
@@ -233,9 +237,10 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="pic">
 <div class="ptxt">
 <h2>
-<span class="de-txt"><span class="fly-wide">Du willst fliegen? Dann klicke hier</span> ↙️</span>
-<span class="en-txt"><span class="fly-wide">Want to fly? Click here</span> ↙️</span>
+<span class="de-txt"><span class="fly-wide">Du willst fliegen? Dann klicke hier</span></span>
+<span class="en-txt"><span class="fly-wide">Want to fly? Click here</span></span>
 </h2>
+<div class="fly-arrow">↙️</div>
 <a id="b4" href="/reise-alert/index.html" target="_blank" rel="noopener" class="cta locked">
 <span class="lock-ico">🔒 </span><span class="de-txt">✈️ Flugkonfiguration öffnen ➡️</span><span class="en-txt">✈️ Open Flight Search ➡️</span>
 </a>
