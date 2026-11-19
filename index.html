@@ -14,7 +14,6 @@ flex-direction:column;overflow-x:hidden}
 .welcome{position:fixed;inset:0;background:rgba(15,41,66,.88);
 display:flex;align-items:center;justify-content:center;
 z-index:2000;padding:20px;backdrop-filter:blur(4px)}
-.welcome:target{display:none}
 .w-card{background:#fff;border:2px solid #7dd3fc;border-radius:16px;
 padding:26px 30px;text-align:center;max-width:400px;
 box-shadow:0 12px 32px rgba(0,0,0,.45)}
@@ -161,13 +160,13 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="w-card">
 <h2>🌴 Willkommen bei paulausbkk</h2>
 <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<a href="#wov" class="w-btn"
-onclick="this.closest('.welcome').style.display='none';
-startMusic();">
-🎵 Seite mit Musik betreten ➡️</a>
+<button type="button" class="w-btn" onclick="enterSite()">
+🎵 Seite mit Musik betreten ➡️</button>
 </div>
 </div>
-<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
+<audio id="bgm" src="musik.mp3" loop preload="auto"
+onplay="updateMusicBtn(true)"
+onpause="updateMusicBtn(false)"></audio>
 <div class="hdr">
 <h1 class="tit" id="t-tit">
 <span>🌴 Suche mit <span class="tit-brand">paulausbkk</span></span>
@@ -297,22 +296,24 @@ function updateMusicBtn(playing){
   }
 }
 
-function startMusic(){
+function enterSite(){
+  const w=el("wov");
+  if(w)w.style.display="none";
   const a=el("bgm");
-  if(!a)return;
-  a.volume=0.45;
-  a.play().then(()=>updateMusicBtn(true))
-          .catch(()=>updateMusicBtn(false));
+  if(a){
+    a.volume=0.45;
+    a.play().catch(()=>updateMusicBtn(false));
+  }
 }
 
 function toggleMusic(){
   const a=el("bgm");
   if(!a)return;
   if(a.paused){
-    startMusic();
+    a.volume=0.45;
+    a.play().catch(()=>updateMusicBtn(false));
   }else{
     a.pause();
-    updateMusicBtn(false);
   }
 }
 
