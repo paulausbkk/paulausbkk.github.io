@@ -26,40 +26,31 @@ text-decoration:none;border:none;border-radius:10px;
 padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
 box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
-.hdr{display:flex;flex-direction:column;gap:6px;
-background:#0f2942;padding:8px 14px;border-radius:12px;
+.hdr{display:flex;flex-direction:column;gap:7px;
+background:#0f2942;padding:9px 14px;border-radius:12px;
 margin-bottom:8px;flex-shrink:0;overflow:hidden;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.tit{font-weight:bold;color:#fff;margin:0;display:inline-block;
-font-size:clamp(1.05rem,1.8vw,1.42rem);line-height:1.15;
-transform-origin:left center;transform:scaleX(1.24);
-letter-spacing:.02em;white-space:nowrap}
-@media(max-width:950px){
-.tit{transform:none;white-space:normal;letter-spacing:normal}
-}
-.hdr-bot{display:flex;align-items:center;justify-content:flex-end;
+.tit{font-weight:bold;color:#fff;margin:0;width:100%;
+text-align:center;font-size:clamp(1.05rem,2.1vw,1.65rem);
+line-height:1.15;letter-spacing:.03em}
+.hdr-bot{display:flex;align-items:center;justify-content:center;
 gap:8px;flex-wrap:wrap;width:100%}
-.hdr-tools{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.hdr-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
 .langs{display:flex;gap:4px;align-items:center}
 .flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:3px 7px;font-size:.74rem;
+border-radius:6px;padding:4px 8px;font-size:.75rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:5px;padding:3px 7px;font-size:.68rem;
+border-radius:6px;padding:4px 8px;font-size:.72rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.btn-grp{display:inline-flex;align-items:center;gap:3px}
-.seg{font-size:.74rem;padding:5px 9px;border-radius:6px;
+.cp{display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+justify-content:center}
+.seg{font-size:.74rem;padding:5px 10px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
 white-space:nowrap}
-.m-off{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
-border-radius:6px;padding:5px 7px;font-size:.7rem;
-font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
-.m-off:hover{background:#0369a1;border-color:#7dd3fc}
-.m-off.dim{opacity:.45}
 .locked{opacity:.55;cursor:not-allowed}
 .bento{display:grid;grid-template-columns:1fr 1fr;
 grid-template-rows:auto 1fr;gap:10px;flex:1;min-height:0}
@@ -83,12 +74,10 @@ background:linear-gradient(0deg,rgba(15,41,66,.75) 10%,
 rgba(15,41,66,.08) 100%)}
 .ptxt{position:relative;z-index:2;color:#fff}
 .ptxt h2{margin:0 0 8px 0;font-size:1.25rem}
-.cta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .cta{display:inline-block;background:#0284c7;color:#fff;
 font-weight:bold;text-decoration:none;padding:8px 16px;
 border-radius:8px;font-size:.88rem;border:1px solid #7dd3fc}
 .cta:hover{background:#0369a1}
-.cta-m{padding:8px 11px;font-size:.8rem;border-radius:8px}
 .ct{font-weight:bold;font-size:.96rem;color:var(--d);
 border-bottom:2px solid #e0f2fe;padding-bottom:4px;margin-bottom:6px;
 flex-shrink:0}
@@ -165,8 +154,7 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
 <a href="#wov" class="w-btn"
 onclick="this.closest('.welcome').style.display='none';
-var a=document.getElementById('bgm');
-if(a){a.volume=0.45;a.play().then(renderMusic).catch(renderMusic);}">
+startMusic();">
 🎵 Seite mit Musik betreten ➡️</a>
 </div>
 </div>
@@ -176,8 +164,8 @@ if(a){a.volume=0.45;a.play().then(renderMusic).catch(renderMusic);}">
 🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
 <div class="hdr-bot">
 <div class="hdr-tools">
-<button type="button" class="mbtn on" id="mbtn"
-onclick="toggleMusic()">🎵 Musik An</button>
+<button type="button" class="mbtn" id="mbtn"
+onclick="toggleMusic()">🔇 Musik Aus</button>
 <div class="langs">
 <button type="button" class="flg act" id="lde"
 onclick="setLang('de')">🇩🇪</button>
@@ -186,27 +174,15 @@ onclick="setLang('en')">🇬🇧</button>
 </div>
 </div>
 <div class="cp">
-<span class="btn-grp">
 <a id="b1" href="/reise-alert/meine-hotelsuche.html"
 target="_blank" rel="noopener" class="seg locked">
 🔒 Hotelsuche</a>
-<button type="button" class="m-off" id="m1"
-onclick="stopMusic()" title="Musik aus">🔇</button>
-</span>
-<span class="btn-grp">
 <a id="b2" href="/reise-alert/meine-flugbuchungen.html"
 target="_blank" rel="noopener" class="seg locked">
 🔒 Flugbuchungen</a>
-<button type="button" class="m-off" id="m2"
-onclick="stopMusic()" title="Musik aus">🔇</button>
-</span>
-<span class="btn-grp">
 <a id="b3" href="/reise-alert/index.html"
 target="_blank" rel="noopener" class="seg locked">
 🔒 Zur Flugsuche ➡️</a>
-<button type="button" class="m-off" id="m3"
-onclick="stopMusic()" title="Musik aus">🔇</button>
-</span>
 </div>
 </div>
 </div>
@@ -215,13 +191,9 @@ onclick="stopMusic()" title="Musik aus">🔇</button>
 <div class="pic">
 <div class="ptxt">
 <h2 id="t-fly">Du willst fliegen? Dann klicke hier ↙️</h2>
-<div class="cta-row">
 <a id="b4" href="/reise-alert/index.html"
 target="_blank" rel="noopener" class="cta locked">
 🔒 Flugkonfiguration öffnen ➡️</a>
-<button type="button" class="m-off cta-m" id="m4"
-onclick="stopMusic()">🔇 Musik Aus</button>
-</div>
 </div>
 </div>
 </div>
@@ -303,38 +275,33 @@ let ok=false,lang="de";
 
 function el(id){return document.getElementById(id);}
 
-function renderMusic(){
-  const a=el("bgm");
-  const isPlaying=a&&!a.paused;
+function updateMusicBtn(playing){
   const btn=el("mbtn");
-  btn.classList.toggle("on",isPlaying);
-  "m1;m2;m3;m4".split(";").forEach(id=>{
-    if(el(id))el(id).classList.toggle("dim",!isPlaying);
-  });
+  if(!btn)return;
+  btn.classList.toggle("on",playing);
   if(lang==="de"){
-    btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";
-    if(el("m4"))el("m4").textContent="🔇 Musik Aus";
+    btn.textContent=playing?"🎵 Musik An":"🔇 Musik Aus";
   }else{
-    btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";
-    if(el("m4"))el("m4").textContent="🔇 Music Off";
+    btn.textContent=playing?"🎵 Music On":"🔇 Music Off";
   }
 }
 
-function stopMusic(){
+function startMusic(){
   const a=el("bgm");
-  if(a&&!a.paused){a.pause();}
-  renderMusic();
+  if(!a)return;
+  a.volume=0.45;
+  a.play().then(()=>updateMusicBtn(true))
+          .catch(()=>updateMusicBtn(false));
 }
 
 function toggleMusic(){
   const a=el("bgm");
   if(!a)return;
   if(a.paused){
-    a.volume=0.45;
-    a.play().then(renderMusic).catch(renderMusic);
+    startMusic();
   }else{
     a.pause();
-    renderMusic();
+    updateMusicBtn(false);
   }
 }
 
@@ -396,7 +363,8 @@ function setLang(l){
     "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Close");
     if(ok)el("pm").textContent="✅ Unlocked";
   }
-  renderMusic();
+  const a=el("bgm");
+  updateMusicBtn(a&&!a.paused);
   renderBtns();
 }
 
@@ -404,3 +372,33 @@ function unlock(){
   ok=true;
   "b1;b2;b3;b4".split(";").forEach(id=>el(id).classList.remove("locked"));
   el("pm").style.color="#15803d";
+  el("pm").textContent=lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
+  el("pi").style.display="none";
+  el("pb").style.display="none";
+  renderBtns();
+  try{sessionStorage.setItem("bkk_ok","1");}catch(e){}
+}
+
+function checkPw(){
+  if(el("pi").value.trim()===PASS){unlock();}
+  else{
+    el("pm").style.color="#991b1b";
+    el("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
+  }
+}
+
+"b1;b2;b3;b4".split(";").forEach(id=>{
+  el(id).addEventListener("click",e=>{
+    if(!ok){
+      e.preventDefault();
+      el("pm").style.color="#991b1b";
+      el("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
+      el("pi").focus();
+    }
+  });
+});
+
+try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
+</script>
+</body>
+</html>
