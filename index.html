@@ -24,25 +24,31 @@ line-height:1.45}
 padding:12px 24px;font-size:1rem;font-weight:bold;cursor:pointer;
 box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
-.hdr{display:flex;justify-content:space-between;align-items:center;
-background:#0f2942;padding:9px 14px;border-radius:12px;
-margin-bottom:10px;flex-wrap:nowrap;gap:10px;flex-shrink:0;
+.hdr{display:flex;flex-direction:column;gap:8px;
+background:#0f2942;padding:10px 14px;border-radius:12px;
+margin-bottom:10px;flex-shrink:0;
 box-shadow:0 4px 14px rgba(15,41,66,.18)}
-.hdr-l{display:flex;align-items:center;gap:10px;min-width:0}
-.tit{font-weight:bold;color:#fff;font-size:1rem;margin:0;
-white-space:nowrap}
-.langs{display:flex;gap:4px;align-items:center;flex-shrink:0}
-.flg,.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
+.hdr-top{display:flex;justify-content:space-between;align-items:center;
+gap:12px;width:100%}
+.tit{font-weight:bold;color:#fff;margin:0;flex:1;
+font-size:clamp(1.15rem,2.3vw,1.85rem);line-height:1.15}
+.hdr-tools{display:flex;align-items:center;gap:5px;
+margin-left:auto;flex-shrink:0}
+.langs{display:flex;gap:4px;align-items:center}
+.flg{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
 border-radius:6px;padding:4px 8px;font-size:.76rem;
+font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
+.mbtn{background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
+border-radius:5px;padding:3px 7px;font-size:.68rem;
 font-weight:bold;cursor:pointer;transition:.2s;white-space:nowrap}
 .flg:hover,.flg.act,.mbtn.on{background:#0284c7;border-color:#7dd3fc;
 box-shadow:0 0 8px rgba(125,211,252,.5)}
-.cp{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.cp{display:flex;gap:6px;align-items:center;justify-content:flex-end;
+flex-wrap:wrap;width:100%}
 .seg{font-size:.76rem;padding:6px 10px;border-radius:6px;
 font-weight:bold;color:#fff;text-transform:uppercase;
 background:#0284c7;text-decoration:none;border:1px solid #38bdf8;
 white-space:nowrap}
-.seg.upg{background:#1e40af;border-color:#60a5fa}
 .locked{opacity:.55;cursor:not-allowed}
 .bento{display:grid;grid-template-columns:1fr 1fr;
 grid-template-rows:auto 1fr;gap:12px;flex:1;min-height:0}
@@ -51,10 +57,6 @@ padding:12px;box-shadow:0 4px 12px rgba(3,105,161,.08);
 display:flex;flex-direction:column;height:100%;
 box-sizing:border-box;min-height:0}
 .box.wide{grid-column:span 2}
-@media(max-width:1050px){
-.hdr,.hdr-l{flex-wrap:wrap}
-.tit{white-space:normal}
-}
 @media(max-width:740px){
 html,body{height:auto}
 .bento{grid-template-columns:1fr;grid-template-rows:auto}
@@ -148,23 +150,36 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="w-card">
 <h2>🌴 Willkommen bei paulausbkk</h2>
 <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<button type="button" class="w-btn" onclick="enterSite()">🎵 Seite mit Musik betreten ➡️</button>
+<button type="button" class="w-btn" onclick="enterSite()">
+🎵 Seite mit Musik betreten ➡️</button>
 </div>
 </div>
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
-<div class="hdr-l">
-<h1 class="tit" id="t-tit">🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
-<button type="button" class="mbtn on" id="mbtn" onclick="toggleMusic()">🎵 Musik An</button>
+<div class="hdr-top">
+<h1 class="tit" id="t-tit">
+🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit</h1>
+<div class="hdr-tools">
+<button type="button" class="mbtn on" id="mbtn"
+onclick="toggleMusic()">🎵 Musik An</button>
 <div class="langs">
-<button type="button" class="flg act" id="lde" onclick="setLang('de')">🇩🇪</button>
-<button type="button" class="flg" id="len" onclick="setLang('en')">🇬🇧</button>
+<button type="button" class="flg act" id="lde"
+onclick="setLang('de')">🇩🇪</button>
+<button type="button" class="flg" id="len"
+onclick="setLang('en')">🇬🇧</button>
+</div>
 </div>
 </div>
 <div class="cp">
-<a id="b1" href="/reise-alert/meine-hotelsuche.html" target="_blank" rel="noopener" class="seg locked">🔒 Hotelsuche</a>
-<a id="b2" href="/reise-alert/meine-flugbuchungen.html" target="_blank" rel="noopener" class="seg locked">🔒 Flugbuchungen</a>
-<a id="b3" href="/reise-alert/index.html" target="_blank" rel="noopener" class="seg upg locked">🔒 Zur Flugsuche ➡️</a>
+<a id="b1" href="/reise-alert/meine-hotelsuche.html"
+target="_blank" rel="noopener" class="seg locked">
+🔒 Hotelsuche</a>
+<a id="b2" href="/reise-alert/meine-flugbuchungen.html"
+target="_blank" rel="noopener" class="seg locked">
+🔒 Flugbuchungen</a>
+<a id="b3" href="/reise-alert/index.html"
+target="_blank" rel="noopener" class="seg locked">
+🔒 Zur Flugsuche ➡️</a>
 </div>
 </div>
 <div class="bento">
@@ -172,12 +187,17 @@ border:1px solid #7dd3fc;font-size:.9rem}
 <div class="pic">
 <div class="ptxt">
 <h2 id="t-fly">Du willst fliegen? Dann klicke hier ↙️</h2>
-<a id="b4" href="/reise-alert/index.html" target="_blank" rel="noopener" class="cta locked">🔒 Flugkonfiguration öffnen ➡️</a>
+<a id="b4" href="/reise-alert/index.html"
+target="_blank" rel="noopener" class="cta locked">
+🔒 Flugkonfiguration öffnen ➡️</a>
 </div>
 </div>
 </div>
 <div class="box">
-<div class="ct"><span id="t-rec">🌟 Unsere Reiseempfehlung die Philippinen</span><span class="ct-sub" id="t-zoom">(Klicken zum Vergrößern)</span></div>
+<div class="ct">
+<span id="t-rec">🌟 Unsere Reiseempfehlung die Philippinen</span>
+<span class="ct-sub" id="t-zoom">(Klicken zum Vergrößern)</span>
+</div>
 <div class="gal-grid">
 <a href="#f1" class="gitem tall"><span class="gnum">1</span>
 <img src="LiS.jpg" alt="Empfehlung 1"></a>
@@ -191,49 +211,60 @@ border:1px solid #7dd3fc;font-size:.9rem}
 </div>
 <div class="box">
 <div class="user-alert">
-<div class="user-ct" id="t-uct">⚠️ Wichtige Hinweise für Nutzer dieser Seite</div>
-<div class="note-space" id="t-unote">Immer wenn Sie auf den nachfolgenden Seiten
-einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text
-darin bitte dringend, weil er wichtige Hinweise enthält.</div>
+<div class="user-ct" id="t-uct">
+⚠️ Wichtige Hinweise für Nutzer dieser Seite</div>
+<div class="note-space" id="t-unote">
+Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten
+blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte
+dringend, weil er wichtige Hinweise enthält.</div>
 <div class="pw-row">
 <span class="pw-msg" id="pm"></span>
-<input type="password" class="pw-inp" id="pi" placeholder="Passwort..." onkeydown="if(event.key==='Enter')checkPw()">
-<button type="button" class="pw-btn" id="pb" onclick="checkPw()">🔓 Freischalten</button>
+<input type="password" class="pw-inp" id="pi"
+placeholder="Passwort..."
+onkeydown="if(event.key==='Enter')checkPw()">
+<button type="button" class="pw-btn" id="pb"
+onclick="checkPw()">🔓 Freischalten</button>
 </div>
 </div>
 <div class="bottom-block">
-<div class="bn" id="t-bn">ℹ️ Diese Seite dient als direkter Start- und
-Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und
-Tarifauswahlen erfolgen direkt auf den jeweils verlinkten
-Anbieterseiten.</div>
-<div class="sub-ct" id="t-sub">ℹ️ Wichtige Reise-Hinweise (Klicken)</div>
+<div class="bn" id="t-bn">
+ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt.
+Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen
+direkt auf den jeweils verlinkten Anbieterseiten.</div>
+<div class="sub-ct" id="t-sub">
+ℹ️ Wichtige Reise-Hinweise (Klicken)</div>
 <details>
 <summary id="t-s1">🛂 Einreise & Dokumente weltweit</summary>
-<p id="t-p1">Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und
-eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online
-ausfüllen.</p>
+<p id="t-p1">Reisepass auf Gültigkeit prüfen (oft mindestens
+6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor
+Abflug online ausfüllen.</p>
 </details>
 <details>
 <summary id="t-s2">🧳 Flüge & Gepäckregeln</summary>
-<p id="t-p2">Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt
-auf der gewählten Anbieterseite beim Buchen hinzufügen.</p>
+<p id="t-p2">Günstige Basistarife sind oft ohne Aufgabegepäck –
+bitte direkt auf der gewählten Anbieterseite beim Buchen
+hinzufügen.</p>
 </details>
 <details>
 <summary id="t-s3">🏨 Hotelbuchung & Stornierung</summary>
-<p id="t-p3">Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen
-und lokale Steuern vor Ort achten.</p>
+<p id="t-p3">Bei weltweiten Hotelbuchungen auf kostenlose
+Stornierungsfristen und lokale Steuern vor Ort achten.</p>
 </details>
 </div>
 </div>
 </div>
 <div id="f1" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x" id="x1">✖ Schließen</a><img src="LiS.jpg" alt="1"></div>
+<a href="#_" class="lb-x" id="x1">✖ Schließen</a>
+<img src="LiS.jpg" alt="1"></div>
 <div id="f2" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x" id="x2">✖ Schließen</a><img src="Strand.jpg" alt="2"></div>
+<a href="#_" class="lb-x" id="x2">✖ Schließen</a>
+<img src="Strand.jpg" alt="2"></div>
 <div id="f3" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x" id="x3">✖ Schließen</a><img src="Strand2.jpg" alt="3"></div>
+<a href="#_" class="lb-x" id="x3">✖ Schließen</a>
+<img src="Strand2.jpg" alt="3"></div>
 <div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
-<a href="#_" class="lb-x" id="x4">✖ Schließen</a><img src="20250205_181003.jpg" alt="4"></div>
+<a href="#_" class="lb-x" id="x4">✖ Schließen</a>
+<img src="20250205_181003.jpg" alt="4"></div>
 <script>
 const PASS="paul2026";
 let ok=false,lang="de";
@@ -245,8 +276,11 @@ function renderMusic(){
   const isPlaying=a&&!a.paused;
   const btn=el("mbtn");
   btn.classList.toggle("on",isPlaying);
-  if(lang==="de"){btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";}
-  else{btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";}
+  if(lang==="de"){
+    btn.textContent=isPlaying?"🎵 Musik An":"🔇 Musik Aus";
+  }else{
+    btn.textContent=isPlaying?"🎵 Music On":"🔇 Music Off";
+  }
 }
 
 function enterSite(){
@@ -290,42 +324,84 @@ function setLang(l){
   el("lde").classList.toggle("act",l==="de");
   el("len").classList.toggle("act",l==="en");
   if(l==="de"){
-    el("t-tit").textContent="🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit";
-    el("t-fly").textContent="Du willst fliegen? Dann klicke hier ↙️";
-    el("t-rec").textContent="🌟 Unsere Reiseempfehlung die Philippinen";
+    el("t-tit").textContent=
+      "🌴 Suche mit paulausbkk dein Hotel und dein Flug weltweit";
+    el("t-fly").textContent=
+      "Du willst fliegen? Dann klicke hier ↙️";
+    el("t-rec").textContent=
+      "🌟 Unsere Reiseempfehlung die Philippinen";
     el("t-zoom").textContent="(Klicken zum Vergrößern)";
-    el("t-uct").textContent="⚠️ Wichtige Hinweise für Nutzer dieser Seite";
-    el("t-unote").textContent="Immer wenn Sie auf den nachfolgenden Seiten einen solchen roten blinkenden Rahmen sehen, dann lesen Sie den Text darin bitte dringend, weil er wichtige Hinweise enthält.";
+    el("t-uct").textContent=
+      "⚠️ Wichtige Hinweise für Nutzer dieser Seite";
+    el("t-unote").textContent=
+      "Immer wenn Sie auf den nachfolgenden Seiten einen solchen "+
+      "roten blinkenden Rahmen sehen, dann lesen Sie den Text "+
+      "darin bitte dringend, weil er wichtige Hinweise enthält.";
     el("pi").placeholder="Passwort...";
     el("pb").textContent="🔓 Freischalten";
-    el("t-bn").textContent="ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.";
-    el("t-sub").textContent="ℹ️ Wichtige Reise-Hinweise (Klicken)";
+    el("t-bn").textContent=
+      "ℹ️ Diese Seite dient als direkter Start- und "+
+      "Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- "+
+      "und Tarifauswahlen erfolgen direkt auf den jeweils "+
+      "verlinkten Anbieterseiten.";
+    el("t-sub").textContent=
+      "ℹ️ Wichtige Reise-Hinweise (Klicken)";
     el("t-s1").textContent="🛂 Einreise & Dokumente weltweit";
-    el("t-p1").textContent="Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) und eventuelle Einreise-Registrierungen rechtzeitig vor Abflug online ausfüllen.";
+    el("t-p1").textContent=
+      "Reisepass auf Gültigkeit prüfen (oft mindestens 6 Monate) "+
+      "und eventuelle Einreise-Registrierungen rechtzeitig vor "+
+      "Abflug online ausfüllen.";
     el("t-s2").textContent="🧳 Flüge & Gepäckregeln";
-    el("t-p2").textContent="Günstige Basistarife sind oft ohne Aufgabegepäck – bitte direkt auf der gewählten Anbieterseite beim Buchen hinzufügen.";
+    el("t-p2").textContent=
+      "Günstige Basistarife sind oft ohne Aufgabegepäck – bitte "+
+      "direkt auf der gewählten Anbieterseite beim Buchen "+
+      "hinzufügen.";
     el("t-s3").textContent="🏨 Hotelbuchung & Stornierung";
-    el("t-p3").textContent="Bei weltweiten Hotelbuchungen auf kostenlose Stornierungsfristen und lokale Steuern vor Ort achten.";
-    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Schließen");
+    el("t-p3").textContent=
+      "Bei weltweiten Hotelbuchungen auf kostenlose "+
+      "Stornierungsfristen und lokale Steuern vor Ort achten.";
+    "x1;x2;x3;x4".split(";").forEach(
+      id=>el(id).textContent="✖ Schließen"
+    );
     if(ok)el("pm").textContent="✅ Freigeschaltet";
   }else{
-    el("t-tit").textContent="🌴 Search hotel and flight worldwide with paulausbkk";
+    el("t-tit").textContent=
+      "🌴 Search hotel and flight worldwide with paulausbkk";
     el("t-fly").textContent="Want to fly? Click here ↙️";
-    el("t-rec").textContent="🌟 Our Travel Recommendation: The Philippines";
+    el("t-rec").textContent=
+      "🌟 Our Travel Recommendation: The Philippines";
     el("t-zoom").textContent="(Click to enlarge)";
-    el("t-uct").textContent="⚠️ Important Notes for Users of this Site";
-    el("t-unote").textContent="Whenever you see a red blinking border like this on the following pages, please read the text inside urgently as it contains important information.";
+    el("t-uct").textContent=
+      "⚠️ Important Notes for Users of this Site";
+    el("t-unote").textContent=
+      "Whenever you see a red blinking border like this on the "+
+      "following pages, please read the text inside urgently as "+
+      "it contains important information.";
     el("pi").placeholder="Password...";
     el("pb").textContent="🔓 Unlock";
-    el("t-bn").textContent="ℹ️ This page serves as a direct starting and configuration point. All bookings, prices, baggage and fare selections take place directly on the linked provider websites.";
+    el("t-bn").textContent=
+      "ℹ️ This page serves as a direct starting and "+
+      "configuration point. All bookings, prices, baggage and "+
+      "fare selections take place directly on the linked "+
+      "provider websites.";
     el("t-sub").textContent="ℹ️ Important Travel Tips (Click)";
     el("t-s1").textContent="🛂 Entry & Documents Worldwide";
-    el("t-p1").textContent="Check passport validity (often at least 6 months) and complete any required online travel registrations before departure.";
+    el("t-p1").textContent=
+      "Check passport validity (often at least 6 months) and "+
+      "complete any required online travel registrations "+
+      "before departure.";
     el("t-s2").textContent="🧳 Flights & Baggage Rules";
-    el("t-p2").textContent="Low basic fares often exclude checked luggage – please add baggage directly on the provider website during booking.";
+    el("t-p2").textContent=
+      "Low basic fares often exclude checked luggage – please "+
+      "add baggage directly on the provider website during "+
+      "booking.";
     el("t-s3").textContent="🏨 Hotel Booking & Cancellation";
-    el("t-p3").textContent="When booking hotels worldwide, pay attention to free cancellation deadlines and local taxes on site.";
-    "x1;x2;x3;x4".split(";").forEach(id=>el(id).textContent="✖ Close");
+    el("t-p3").textContent=
+      "When booking hotels worldwide, pay attention to free "+
+      "cancellation deadlines and local taxes on site.";
+    "x1;x2;x3;x4".split(";").forEach(
+      id=>el(id).textContent="✖ Close"
+    );
     if(ok)el("pm").textContent="✅ Unlocked";
   }
   renderMusic();
@@ -334,9 +410,12 @@ function setLang(l){
 
 function unlock(){
   ok=true;
-  "b1;b2;b3;b4".split(";").forEach(id=>el(id).classList.remove("locked"));
+  "b1;b2;b3;b4".split(";").forEach(
+    id=>el(id).classList.remove("locked")
+  );
   el("pm").style.color="#15803d";
-  el("pm").textContent=lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
+  el("pm").textContent=
+    lang==="de"?"✅ Freigeschaltet":"✅ Unlocked";
   el("pi").style.display="none";
   el("pb").style.display="none";
   renderBtns();
@@ -347,22 +426,7 @@ function checkPw(){
   if(el("pi").value.trim()===PASS){unlock();}
   else{
     el("pm").style.color="#991b1b";
-    el("pm").textContent=lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
+    el("pm").textContent=
+      lang==="de"?"❌ Falsches Passwort":"❌ Wrong password";
   }
 }
-
-"b1;b2;b3;b4".split(";").forEach(id=>{
-  el(id).addEventListener("click",e=>{
-    if(!ok){
-      e.preventDefault();
-      el("pm").style.color="#991b1b";
-      el("pm").textContent=lang==="de"?"⚠️ Bitte zuerst Passwort eingeben":"⚠️ Please enter password first";
-      el("pi").focus();
-    }
-  });
-});
-
-try{if(sessionStorage.getItem("bkk_ok")==="1")unlock();}catch(e){}
-</script>
-</body>
-</html>
