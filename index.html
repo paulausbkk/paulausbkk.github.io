@@ -26,16 +26,32 @@ html,body{
   overflow-x:hidden;
 }
 
-/* Reine CSS-Steuerung für Start-Overlay & Sprache */
-.state-inp{position:fixed;opacity:0;pointer-events:none}
-#enter-chk:checked ~ .welcome{display:none}
-.en-txt{display:none}
+.state-inp{
+  position:fixed;
+  opacity:0;
+  pointer-events:none;
+}
+
+#enter-chk:checked ~ .welcome{
+  display:none;
+}
+
+.en-txt{
+  display:none;
+}
+
 #lang-en:checked ~ .hdr .de-txt,
 #lang-en:checked ~ .bento .de-txt,
-#lang-en:checked ~ .lb .de-txt{display:none}
+#lang-en:checked ~ .lb .de-txt{
+  display:none;
+}
+
 #lang-en:checked ~ .hdr .en-txt,
 #lang-en:checked ~ .bento .en-txt,
-#lang-en:checked ~ .lb .en-txt{display:inline}
+#lang-en:checked ~ .lb .en-txt{
+  display:inline;
+}
+
 #lang-de:checked ~ .hdr .flg-de,
 #lang-en:checked ~ .hdr .flg-en{
   background:#0284c7;
@@ -43,7 +59,6 @@ html,body{
   box-shadow:0 0 8px rgba(125,211,252,.5);
 }
 
-/* Willkommens-Overlay */
 .welcome{
   position:fixed;
   inset:0;
@@ -55,6 +70,7 @@ html,body{
   padding:20px;
   backdrop-filter:blur(4px);
 }
+
 .w-card{
   background:#fff;
   border:2px solid #7dd3fc;
@@ -64,8 +80,20 @@ html,body{
   max-width:400px;
   box-shadow:0 12px 32px rgba(0,0,0,.45);
 }
-.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
-.w-card p{margin:0 0 18px 0;color:#334155;font-size:.92rem;line-height:1.45}
+
+.w-card h2{
+  margin:0 0 10px 0;
+  color:#0f2942;
+  font-size:1.35rem;
+}
+
+.w-card p{
+  margin:0 0 18px 0;
+  color:#334155;
+  font-size:.92rem;
+  line-height:1.45;
+}
+
 .w-btn{
   display:inline-block;
   background:#0284c7;
@@ -79,9 +107,12 @@ html,body{
   box-shadow:0 4px 12px rgba(2,132,199,.35);
   transition:.2s;
 }
-.w-btn:hover{background:#0369a1;transform:translateY(-1px)}
 
-/* Header & Navigation */
+.w-btn:hover{
+  background:#0369a1;
+  transform:translateY(-1px);
+}
+
 .hdr{
   display:flex;
   flex-direction:column;
@@ -94,6 +125,7 @@ html,body{
   border:1px solid #1e3a8a;
   box-shadow:0 4px 14px rgba(15,41,66,.22);
 }
+
 .tit{
   font-weight:800;
   color:#f0f9ff;
@@ -110,10 +142,21 @@ html,body{
   border-bottom:1px solid rgba(125,211,252,.22);
   text-shadow:0 2px 10px rgba(56,189,248,.35);
 }
-.tit-brand{color:#38bdf8;text-shadow:0 0 12px rgba(56,189,248,.5)}
-@media(max-width:860px){
-  .tit{flex-wrap:wrap;justify-content:center;text-align:center;letter-spacing:.01em}
+
+.tit-brand{
+  color:#38bdf8;
+  text-shadow:0 0 12px rgba(56,189,248,.5);
 }
+
+@media(max-width:860px){
+  .tit{
+    flex-wrap:wrap;
+    justify-content:center;
+    text-align:center;
+    letter-spacing:.01em;
+  }
+}
+
 .hdr-bot{
   display:flex;
   align-items:center;
@@ -122,7 +165,14 @@ html,body{
   flex-wrap:wrap;
   width:100%;
 }
-.hdr-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
+
+.hdr-tools{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+}
+
 .mbtn{
   background:#1e3a8a;
   color:#fff;
@@ -135,16 +185,35 @@ html,body{
   transition:.2s;
   white-space:nowrap;
 }
+
 .mbtn:hover,.mbtn.on{
   background:#0284c7;
   border-color:#7dd3fc;
   box-shadow:0 0 8px rgba(125,211,252,.5);
 }
-.mbtn .m-off{display:inline}
-.mbtn .m-on{display:none}
-.mbtn.on .m-off{display:none}
-.mbtn.on .m-on{display:inline}
-.langs{display:flex;gap:4px;align-items:center}
+
+.mbtn .m-off{
+  display:inline;
+}
+
+.mbtn .m-on{
+  display:none;
+}
+
+.mbtn.on .m-off{
+  display:none;
+}
+
+.mbtn.on .m-on{
+  display:inline;
+}
+
+.langs{
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+
 .flg{
   background:#1e3a8a;
   color:#fff;
@@ -158,8 +227,20 @@ html,body{
   white-space:nowrap;
   user-select:none;
 }
-.flg:hover{background:#0284c7;border-color:#7dd3fc}
-.cp{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+
+.flg:hover{
+  background:#0284c7;
+  border-color:#7dd3fc;
+}
+
+.cp{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
 .seg{
   font-size:.74rem;
   padding:5px 10px;
@@ -172,11 +253,20 @@ html,body{
   border:1px solid #38bdf8;
   white-space:nowrap;
 }
-.seg:hover{background:#0369a1}
-.locked{opacity:.55;cursor:not-allowed}
-body.unlocked .lock-ico{display:none}
 
-/* Bento-Raster */
+.seg:hover{
+  background:#0369a1;
+}
+
+.locked{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+body.unlocked .lock-ico{
+  display:none;
+}
+
 .bento{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -185,6 +275,7 @@ body.unlocked .lock-ico{display:none}
   flex:1;
   min-height:0;
 }
+
 .box{
   background:#fff;
   border:1px solid #93c5fd;
@@ -197,30 +288,36 @@ body.unlocked .lock-ico{display:none}
   box-sizing:border-box;
   min-height:0;
 }
-.box.wide{grid-column:span 2}
+
+.box.wide{
+  grid-column:span 2;
+}
+
 @media(max-width:740px){
   html,body{height:auto}
   .bento{grid-template-columns:1fr;grid-template-rows:auto}
   .box.wide{grid-column:span 1}
 }
 
-/* Natürliche Licht- & Sonnenuntergangs-Simulation */
 @keyframes wingShift{
   0%,100%{filter:brightness(1.02) saturate(1.04) hue-rotate(0deg)}
   35%{filter:brightness(1.07) saturate(1.24) sepia(.14) hue-rotate(-8deg)}
   70%{filter:brightness(.97) saturate(1.18) hue-rotate(10deg)}
 }
+
 @keyframes wingGlow{
   0%,100%{opacity:.12}
   40%{opacity:.34}
   75%{opacity:.22}
 }
+
 @keyframes sunsetPhoto{
   0%,100%{filter:brightness(1.03) saturate(1.06) contrast(1.02) sepia(.04)}
   32%{filter:brightness(1.02) saturate(1.28) contrast(1.05) sepia(.22) hue-rotate(-10deg)}
   62%{filter:brightness(.92) saturate(1.38) contrast(1.09) sepia(.34) hue-rotate(-18deg)}
   82%{filter:brightness(.86) saturate(1.22) contrast(1.07) sepia(.24) hue-rotate(-8deg)}
 }
+
 @keyframes sunsetWarmth{
   0%,100%{opacity:0}
   35%{opacity:.22}
@@ -228,7 +325,6 @@ body.unlocked .lock-ico{display:none}
   82%{opacity:.26}
 }
 
-/* Oberes Flügel-Banner */
 .pic{
   position:relative;
   border-radius:10px;
@@ -239,6 +335,7 @@ body.unlocked .lock-ico{display:none}
   padding:12px 14px;
   background-color:#0f2942;
 }
+
 .pic-bg{
   position:absolute;
   inset:0;
@@ -249,6 +346,7 @@ body.unlocked .lock-ico{display:none}
   background-repeat:no-repeat;
   animation:wingShift 16s ease-in-out infinite;
 }
+
 .pic::before{
   content:"";
   position:absolute;
@@ -256,6 +354,7 @@ body.unlocked .lock-ico{display:none}
   z-index:1;
   background:linear-gradient(180deg,rgba(15,41,66,.72) 0%,rgba(15,41,66,.16) 50%,rgba(15,41,66,.75) 100%);
 }
+
 .pic::after{
   content:"";
   position:absolute;
@@ -265,6 +364,7 @@ body.unlocked .lock-ico{display:none}
   background:radial-gradient(circle at 78% 35%,rgba(251,146,60,.45),rgba(244,63,94,.2) 45%,transparent 75%);
   animation:wingGlow 16s ease-in-out infinite;
 }
+
 .ptxt{
   position:relative;
   z-index:2;
@@ -276,6 +376,7 @@ body.unlocked .lock-ico{display:none}
   align-items:flex-start;
   gap:4px;
 }
+
 .ptxt h2{
   margin:0;
   font-size:clamp(1.2rem,2.3vw,1.8rem);
@@ -284,17 +385,25 @@ body.unlocked .lock-ico{display:none}
   line-height:1.15;
   text-shadow:0 2px 8px rgba(0,0,0,.55);
 }
-.fly-wide{display:inline-block;transform:scaleX(1.12);transform-origin:left center}
+
+.fly-wide{
+  display:inline-block;
+  transform:scaleX(1.12);
+  transform-origin:left center;
+}
+
 .fly-arrow{
   font-size:1.55rem;
   line-height:1;
   margin:2px 0 2px 175px;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));
 }
+
 @media(max-width:740px){
   .fly-wide{transform:none}
   .fly-arrow{margin-left:135px}
 }
+
 .cta{
   display:inline-block;
   background:#0284c7;
@@ -306,9 +415,11 @@ body.unlocked .lock-ico{display:none}
   font-size:.88rem;
   border:1px solid #7dd3fc;
 }
-.cta:hover{background:#0369a1}
 
-/* Galerie-Box links */
+.cta:hover{
+  background:#0369a1;
+}
+
 .ct{
   font-weight:bold;
   font-size:.96rem;
@@ -318,7 +429,14 @@ body.unlocked .lock-ico{display:none}
   margin-bottom:6px;
   flex-shrink:0;
 }
-.ct-sub{font-size:.52em;font-weight:normal;color:#475569;margin-left:5px}
+
+.ct-sub{
+  font-size:.52em;
+  font-weight:normal;
+  color:#475569;
+  margin-left:5px;
+}
+
 .gal-grid{
   display:grid;
   grid-template-columns:1.25fr 1fr;
@@ -327,6 +445,7 @@ body.unlocked .lock-ico{display:none}
   flex:1;
   min-height:0;
 }
+
 .gitem{
   position:relative;
   border-radius:8px;
@@ -338,7 +457,11 @@ body.unlocked .lock-ico{display:none}
   text-decoration:none;
   cursor:zoom-in;
 }
-.gitem.tall{grid-row:span 3}
+
+.gitem.tall{
+  grid-row:span 3;
+}
+
 .gitem img{
   width:100%;
   height:100%;
@@ -347,10 +470,12 @@ body.unlocked .lock-ico{display:none}
   display:block;
   transition:transform .35s ease;
 }
+
 .gitem.tall img{
   object-position:center 15%;
   animation:sunsetPhoto 18s ease-in-out infinite;
 }
+
 .gitem.tall::after{
   content:"";
   position:absolute;
@@ -361,7 +486,11 @@ body.unlocked .lock-ico{display:none}
   background:linear-gradient(180deg,rgba(251,146,60,.55) 0%,rgba(234,88,12,.45) 48%,rgba(124,45,18,.55) 100%);
   animation:sunsetWarmth 18s ease-in-out infinite;
 }
-.gitem:hover img{transform:scale(1.04)}
+
+.gitem:hover img{
+  transform:scale(1.04);
+}
+
 .gnum{
   position:absolute;
   top:5px;
@@ -376,11 +505,11 @@ body.unlocked .lock-ico{display:none}
   border:1px solid #7dd3fc;
 }
 
-/* Hinweis-Box & Passwort rechts */
 @keyframes pulseHint{
   0%,100%{border-color:#7f1d1d;box-shadow:0 0 0 rgba(185,28,28,0)}
   50%{border-color:#dc2626;box-shadow:0 0 14px rgba(185,28,28,.7)}
 }
+
 .user-alert{
   flex:1;
   display:flex;
@@ -393,6 +522,7 @@ body.unlocked .lock-ico{display:none}
   background:#f0f9ff;
   animation:pulseHint 2.2s infinite ease-in-out;
 }
+
 .user-ct{
   font-weight:bold;
   font-size:.94rem;
@@ -402,27 +532,52 @@ body.unlocked .lock-ico{display:none}
   margin-bottom:5px;
   flex-shrink:0;
 }
-.note-space{flex:1;min-height:36px;color:#0f172a;font-size:.83rem;font-weight:bold;line-height:1.35}
-.pw-row{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-top:5px;flex-shrink:0;flex-wrap:wrap}
-.pw-msg{font-size:.74rem;font-weight:bold;color:#991b1b}
-.pw-inp{height:28px;padding:0 8px;border:1px solid #0284c7;border-radius:6px;font-size:.8rem;background:#fff;width:130px}
+
+.note-space{
+  flex:1;
+  min-height:36px;
+  color:#0f172a;
+  font-size:.83rem;
+  font-weight:bold;
+  line-height:1.35;
+}
+
+.pw-row{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:6px;
+  margin-top:5px;
+  flex-shrink:0;
+  flex-wrap:wrap;
+}
+
+.pw-msg{
+  font-size:.74rem;
+  font-weight:bold;
+  color:#991b1b;
+}
+
+.pw-inp{
+  height:28px;
+  padding:0 8px;
+  border:1px solid #0284c7;
+  border-radius:6px;
+  font-size:.8rem;
+  background:#fff;
+  width:130px;
+}
+
 .pw-btn{
   height:28px;
   padding:0 10px;
   background:#0284c7;
   color:#fff;
-  border:none;
-  border-radius:6px;
-  font-weight:bold;
-  font-size:.76rem;
   <body>
-
-<!-- Unsichtbare Status-Schalter (reines CSS) -->
 <input type="checkbox" id="enter-chk" class="state-inp">
 <input type="radio" name="lang" id="lang-de" class="state-inp" checked>
 <input type="radio" name="lang" id="lang-en" class="state-inp">
 
-<!-- Willkommensfenster -->
 <div class="welcome">
   <div class="w-card">
     <h2>🌴 Willkommen bei paulausbkk</h2>
@@ -431,10 +586,8 @@ body.unlocked .lock-ico{display:none}
   </div>
 </div>
 
-<!-- Hintergrundmusik -->
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 
-<!-- Kopfbereich -->
 <div class="hdr">
   <h1 class="tit">
     <span>🌴 <span class="de-txt">Suche mit</span><span class="en-txt">Search with</span> <span class="tit-brand">paulausbkk</span></span>
@@ -465,10 +618,7 @@ body.unlocked .lock-ico{display:none}
   </div>
 </div>
 
-<!-- Hauptbereich (Bento-Grid) -->
 <div class="bento">
-
-  <!-- Oberes Flügel-Banner -->
   <div class="box wide">
     <div class="pic">
       <div class="pic-bg"></div>
@@ -485,7 +635,6 @@ body.unlocked .lock-ico{display:none}
     </div>
   </div>
 
-  <!-- Linke Box: Bildergalerie -->
   <div class="box">
     <div class="ct">
       <span>
@@ -505,7 +654,6 @@ body.unlocked .lock-ico{display:none}
     </div>
   </div>
 
-  <!-- Rechte Box: Hinweise & Passwort -->
   <div class="box">
     <div class="user-alert">
       <div class="user-ct">
@@ -566,16 +714,13 @@ body.unlocked .lock-ico{display:none}
       </details>
     </div>
   </div>
-
 </div>
 
-<!-- Lightbox-Großansichten -->
 <div id="f1" class="lb"><a href="#_" class="lb-bg"></a><a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a><img src="LiS.jpg" alt="1"></div>
 <div id="f2" class="lb"><a href="#_" class="lb-bg"></a><a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a><img src="Strand.jpg" alt="2"></div>
 <div id="f3" class="lb"><a href="#_" class="lb-bg"></a><a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a><img src="Strand2.jpg" alt="3"></div>
 <div id="f4" class="lb"><a href="#_" class="lb-bg"></a><a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a><img src="20250205_181003.jpg" alt="4"></div>
 
-<!-- Passwort- & Audio-Steuerung -->
 <script>
 const PASS="paul2026";
 let ok=false;
@@ -642,3 +787,16 @@ function checkPw(){
       const pm=document.getElementById("pm");
       pm.style.color="#991b1b";
       pm.textContent=isEn()
+        ?"🔒 Please enter password below first"
+        :"🔒 Bitte erst unten Passwort eingeben";
+      document.getElementById("pi").focus();
+    }
+  });
+});
+
+try{
+  if(sessionStorage.getItem("pab_ok")==="1")unlock();
+}catch(e){}
+</script>
+</body>
+</html>
