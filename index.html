@@ -27,15 +27,19 @@ box-shadow:0 0 8px rgba(125,211,252,.5)}
 display:flex;align-items:center;justify-content:center;
 z-index:2000;padding:20px;backdrop-filter:blur(4px)}
 .w-card{background:#fff;border:2px solid #7dd3fc;border-radius:16px;
-padding:26px 30px;text-align:center;max-width:400px;
+padding:26px 30px;text-align:center;max-width:420px;
 box-shadow:0 12px 32px rgba(0,0,0,.45)}
-.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
-.w-card p{margin:0 0 18px 0;color:#334155;font-size:.92rem;
-line-height:1.45}
-.w-btn{display:inline-block;background:#0284c7;color:#fff;border:none;
-border-radius:10px;padding:12px 24px;font-size:1rem;font-weight:bold;
-cursor:pointer;box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
+.w-card h2{margin:0 0 3px 0;color:#0f2942;font-size:1.35rem}
+.w-card .w-h2-en{margin:0 0 12px 0;color:#0369a1;font-size:1.02rem;font-weight:bold}
+.w-card p{margin:0 0 4px 0;color:#334155;font-size:.92rem;line-height:1.4}
+.w-card .w-p-en{margin:0 0 18px 0;color:#64748b;font-size:.84rem;line-height:1.35}
+.w-btn{display:inline-flex;flex-direction:column;align-items:center;
+background:#0284c7;color:#fff;border:none;border-radius:10px;
+padding:11px 28px;cursor:pointer;
+box-shadow:0 4px 12px rgba(2,132,199,.35);transition:.2s}
 .w-btn:hover{background:#0369a1;transform:translateY(-1px)}
+.w-btn .b-de{font-size:1.02rem;font-weight:bold}
+.w-btn .b-en{font-size:.84rem;color:#e0f2fe;margin-top:2px;font-weight:bold}
 .hdr{display:flex;flex-direction:column;gap:8px;
 background:linear-gradient(180deg,#0f2942 0%,#0c2238 100%);
 padding:9px 16px;border-radius:12px;margin-bottom:8px;
@@ -107,12 +111,12 @@ font-weight:800;letter-spacing:.05em;line-height:1.15;
 text-shadow:0 2px 8px rgba(0,0,0,.55)}
 .fly-wide{display:inline-block;transform:scaleX(1.12);
 transform-origin:left center}
-.fly-arrow{font-size:1.55rem;line-height:1;
-margin:2px 0 2px 175px;
-filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.fly-arrow{display:inline-block;font-size:2.15rem;line-height:1;
+margin:0 0 2px 245px;transform:rotate(-26deg);
+filter:drop-shadow(0 2px 6px rgba(0,0,0,.65))}
 @media(max-width:740px){
 .fly-wide{transform:none}
-.fly-arrow{margin-left:135px}
+.fly-arrow{margin-left:185px}
 }
 .cta{display:inline-block;background:#0284c7;color:#fff;
 font-weight:bold;text-decoration:none;padding:8px 16px;
@@ -175,32 +179,35 @@ details p{margin:3px 0 0 0;font-size:.77rem;line-height:1.3;
 color:#1e293b}
 .lb{position:fixed;inset:0;background:rgba(15,23,42,.92);
 display:none;align-items:center;justify-content:center;
-z-index:999;padding:20px}
+z-index:1000;padding:16px}
 .lb:target{display:flex}
-.lb img{max-width:94vw;max-height:88vh;border-radius:10px;
-border:2px solid #7dd3fc;box-shadow:0 10px 30px rgba(0,0,0,.6);
-object-fit:contain}
-.lb-bg{position:absolute;inset:0;cursor:zoom-out}
-.lb-x{position:fixed;top:16px;right:20px;z-index:1001;
-background:#0284c7;color:#fff;text-decoration:none;
-font-weight:bold;padding:8px 14px;border-radius:8px;
-border:1px solid #7dd3fc;font-size:.9rem}
+.lb img{max-width:94vw;max-height:90vh;border-radius:10px;
+border:3px solid #7dd3fc;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.lb-bg{position:fixed;inset:0}
+.lb-x{position:fixed;top:16px;right:20px;background:#0284c7;
+color:#fff;text-decoration:none;font-weight:bold;
+padding:8px 14px;border-radius:8px;border:1px solid #7dd3fc;
+z-index:1001;font-size:.9rem}
 </style>
 </head>
 <body>
 <input type="checkbox" id="enter-chk" class="state-inp">
-<input type="radio" name="lang" id="lang-de" class="state-inp" checked>
-<input type="radio" name="lang" id="lang-en" class="state-inp">
+<input type="radio" name="lang" id="lang-de" class="state-inp" checked onchange="syncLang()">
+<input type="radio" name="lang" id="lang-en" class="state-inp" onchange="syncLang()">
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 
 <div class="welcome">
-<div class="w-card">
-<h2>🌴 Willkommen bei paulausbkk</h2>
-<p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
-<label for="enter-chk" class="w-btn" onclick="startBgm()">🎵 Seite mit Musik betreten ➡️</label>
+  <div class="w-card">
+    <h2>🌴 Willkommen bei paulausbkk</h2>
+    <div class="w-h2-en">Welcome to paulausbkk</div>
+    <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
+    <div class="w-p-en">Your worldwide travel portal for flights and hotels.</div>
+    <label for="enter-chk" class="w-btn" onclick="startBgm()">
+      <span class="b-de">Seite betreten ➡️</span>
+      <span class="b-en">Enter site ➡️</span>
+    </label>
+  </div>
 </div>
-</div>
-
-<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 
 <div class="hdr">
 <h1 class="tit">
@@ -367,17 +374,28 @@ function startBgm(){
 function toggleBgm(){
   const a=document.getElementById("bgm");
   if(!a)return;
-  if(a.paused){
-    startBgm();
-  }else{
-    a.pause();
-    syncBgm();
-  }
+  if(a.paused){startBgm();}else{a.pause();syncBgm();}
 }
 
 function isEn(){
   const r=document.getElementById("lang-en");
   return r&&r.checked;
+}
+
+function syncLang(){
+  const l=isEn()?"en":"de";
+  try{localStorage.setItem("rk_lang",l);}catch(e){}
+  document.documentElement.lang=l;
+  const links={
+    b1:"/reise-alert/meine-hotelsuche.html",
+    b2:"/reise-alert/meine-flugbuchungen.html",
+    b3:"/reise-alert/index.html",
+    b4:"/reise-alert/index.html"
+  };
+  Object.keys(links).forEach(function(id){
+    const el=document.getElementById(id);
+    if(el)el.href=links[id]+"?lang="+l;
+  });
 }
 
 function unlock(){
@@ -407,21 +425,25 @@ function checkPw(){
 
 ["b1","b2","b3","b4"].forEach(function(id){
   document.getElementById(id).addEventListener("click",function(e){
+    syncLang();
     if(!ok){
       e.preventDefault();
       const pm=document.getElementById("pm");
       pm.style.color="#991b1b";
-      pm.textContent=isEn()
-        ?"🔒 Please enter password below first"
-        :"🔒 Bitte erst unten Passwort eingeben";
+      pm.textContent=isEn()?"🔒 Please enter password first":"🔒 Bitte erst Passwort eingeben";
       document.getElementById("pi").focus();
     }
   });
 });
 
-try{
-  if(sessionStorage.getItem("pab_ok")==="1")unlock();
-}catch(e){}
+(function(){
+  try{
+    const saved=localStorage.getItem("rk_lang");
+    if(saved==="en")document.getElementById("lang-en").checked=true;
+    if(sessionStorage.getItem("pab_ok")==="1")unlock();
+  }catch(e){}
+  syncLang();
+})();
 </script>
 </body>
 </html>
