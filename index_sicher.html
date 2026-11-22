@@ -91,10 +91,6 @@ html,body{
   background:#0284c7;border-color:#7dd3fc;
   box-shadow:0 0 8px rgba(125,211,252,.5)
 }
-.mbtn .m-off{display:inline}
-.mbtn .m-on{display:none}
-.mbtn.on .m-off{display:none}
-.mbtn.on .m-on{display:inline}
 .langs{display:flex;gap:4px;align-items:center}
 .flg{
   background:#1e3a8a;color:#fff;border:1px solid #60a5fa;
@@ -310,21 +306,15 @@ details p{
     <div class="hdr-tools">
       <button type="button" class="mbtn" id="mbtn"
         onclick="toggleBgm()">
-        <span class="m-on">
-          <span class="de-txt">🔇 Musik Aus</span>
-          <span class="en-txt">🔇 Music Off</span>
-        </span>
-        <span class="m-off">
-          <span class="de-txt">🎵 Musik An</span>
-          <span class="en-txt">🎵 Music On</span>
-        </span>
+        <span class="de-txt">🎵 Musik An</span>
+        <span class="en-txt">🎵 Music On</span>
       </button>
       <div class="langs">
         <label for="lang-de" class="flg flg-de">🇩🇪</label>
         <label for="lang-en" class="flg flg-en">🇬🇧</label>
       </div>
     </div>
-    <div class="cp">
+     <div class="cp">
       <a id="b1" href="/reise-alert/meine-hotelsuche.html"
         target="_blank" rel="noopener" class="seg locked">
         <span class="lock-ico">🔒 </span>
@@ -475,29 +465,34 @@ details p{
 <script>
 const PASS="paul2026";
 let ok=false;
+let bgmOn=false;
 
-function syncBgm(){
-  const a=document.getElementById("bgm");
+function setBgmText(playing){
+  bgmOn=playing;
   const b=document.getElementById("mbtn");
-  if(a&&b)b.classList.toggle("on",!a.paused);
+  if(!b)return;
+  b.classList.toggle("on",playing);
+  b.innerHTML=playing
+    ?'<span class="de-txt">🔇 Musik Aus</span><span class="en-txt">🔇 Music Off</span>'
+    :'<span class="de-txt">🎵 Musik An</span><span class="en-txt">🎵 Music On</span>';
 }
 
 function startBgm(){
+  setBgmText(true);
   const a=document.getElementById("bgm");
   if(a){
     a.volume=0.45;
-    a.play().then(syncBgm).catch(syncBgm);
+    a.play().catch(function(){});
   }
 }
 
 function toggleBgm(){
   const a=document.getElementById("bgm");
-  if(!a)return;
-  if(a.paused){
-    startBgm();
+  if(bgmOn){
+    setBgmText(false);
+    if(a)a.pause();
   }else{
-    a.pause();
-    syncBgm();
+    startBgm();
   }
 }
 
