@@ -360,27 +360,6 @@ details p{
       </div>
     </div>
   </div>
-  <div class="box wide">
-    <div class="pic">
-      <div class="ptxt">
-        <h2>
-          <span class="de-txt">
-            <span class="fly-wide">Du willst fliegen? Dann klicke hier</span>
-          </span>
-          <span class="en-txt">
-            <span class="fly-wide">Want to fly? Click here</span>
-          </span>
-        </h2>
-        <div class="fly-arrow">↙️</div>
-        <a id="b4" href="/reise-alert/index.html"
-          target="_blank" rel="noopener" class="cta locked">
-          <span class="lock-ico">🔒 </span>
-          <span class="de-txt">✈️ Flugkonfiguration öffnen ➡️</span>
-          <span class="en-txt">✈️ Open Flight Search ➡️</span>
-        </a>
-      </div>
-    </div>
-  </div>
 
   <div class="box">
     <div class="ct">
@@ -427,7 +406,6 @@ details p{
         </button>
       </div>
     </div>
-
     <div class="bottom-block">
       <div class="bn">
         <span class="de-txt">ℹ️ Diese Seite dient als direkter Start- und Konfigurationspunkt. Alle Buchungen, Preise sowie Gepäck- und Tarifauswahlen erfolgen direkt auf den jeweils verlinkten Anbieterseiten.</span>
@@ -515,12 +493,16 @@ function startBgm(){
   }
 }
 
-function toggleBgm(){
+function stopBgm(){
+  bgmOn=false;
+  updBgmLabel();
   const a=document.getElementById("bgm");
+  if(a)a.pause();
+}
+
+function toggleBgm(){
   if(bgmOn){
-    bgmOn=false;
-    updBgmLabel();
-    if(a)a.pause();
+    stopBgm();
   }else{
     startBgm();
   }
