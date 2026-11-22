@@ -43,14 +43,16 @@ html,body{
   line-height:1.45
 }
 .w-btn{
-  display:block;width:100%;box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;max-width:290px;margin:0 auto;box-sizing:border-box;
   background:#0284c7;color:#fff;border:none;
-  border-radius:12px;padding:16px 20px;font-size:1.05rem;
+  border-radius:12px;padding:16px 20px;font-size:1.08rem;
   font-weight:bold;cursor:pointer;text-align:center;
   touch-action:manipulation;user-select:none;
   -webkit-tap-highlight-color:transparent
 }
 .w-btn:active{background:#0369a1}
+.w-btn span{pointer-events:none}
 .hdr{
   display:flex;flex-direction:column;gap:8px;
   background:linear-gradient(180deg,#0f2942 0%,#0c2238 100%);
@@ -283,7 +285,7 @@ details p{
     <h2>🌴 Willkommen bei paulausbkk</h2>
     <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
     <button type="button" class="w-btn" id="wEnterBtn">
-      🎵 Seite mit Musik betreten ➡️
+      <span>Eintreten / Entry ➡️</span>
     </button>
   </div>
 </div>
@@ -313,7 +315,7 @@ details p{
           onclick="setTimeout(updBgmLabel,10)">🇬🇧</label>
       </div>
     </div>
-    <div class="cp">
+     <div class="cp">
       <a id="b1" href="/reise-alert/meine-hotelsuche.html"
         target="_blank" rel="noopener" class="seg locked">
         <span class="lock-ico">🔒 </span>
