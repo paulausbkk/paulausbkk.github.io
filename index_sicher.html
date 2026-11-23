@@ -337,7 +337,6 @@ details p{
     </div>
   </div>
 </div>
-
 <div class="bento">
   <div class="box wide">
     <div class="pic">
@@ -488,7 +487,7 @@ function startBgm(){
   updBgmLabel();
   const a=document.getElementById("bgm");
   if(a){
-    a.volume=0.45;
+    a.volume=1.0;
     a.play().catch(function(){});
   }
 }
@@ -525,7 +524,7 @@ if(wb){
 function unlock(){
   ok=true;
   document.body.classList.add("unlocked");
-  ["b1","b2","b3","b4"].forEach(function(id){
+  new Array("b1","b2","b3","b4").forEach(function(id){
     document.getElementById(id).classList.remove("locked");
   });
   const pm=document.getElementById("pm");
@@ -547,7 +546,7 @@ function checkPw(){
   }
 }
 
-["b1","b2","b3","b4"].forEach(function(id){
+new Array("b1","b2","b3","b4").forEach(function(id){
   document.getElementById(id).addEventListener("click",function(e){
     if(!ok){
       e.preventDefault();
