@@ -310,9 +310,9 @@ details p{
         onclick="toggleBgm()">🔇 Musik Aus</button>
       <div class="langs">
         <label for="lang-de" class="flg flg-de"
-          onclick="setTimeout(updBgmLabel,10)">🇩🇪</label>
+          onclick="setLang('de')">🇩🇪</label>
         <label for="lang-en" class="flg flg-en"
-          onclick="setTimeout(updBgmLabel,10)">🇬🇧</label>
+          onclick="setLang('en')">🇬🇧</label>
       </div>
     </div>
     <div class="cp">
@@ -460,7 +460,6 @@ details p{
 <div id="f4" class="lb"><a href="#_" class="lb-bg"></a>
 <a href="#_" class="lb-x"><span class="de-txt">✖ Schließen</span><span class="en-txt">✖ Close</span></a>
 <img src="20250205_181003.jpg" alt="4"></div>
-
 <script>
 const PASS="paul2026";
 let ok=false;
@@ -469,6 +468,19 @@ let bgmOn=false;
 function isEn(){
   const r=document.getElementById("lang-en");
   return r&&r.checked;
+}
+
+function setLang(l){
+  const isE=(l==="en");
+  const rEn=document.getElementById("lang-en");
+  const rDe=document.getElementById("lang-de");
+  if(rEn)rEn.checked=isE;
+  if(rDe)rDe.checked=!isE;
+  document.documentElement.lang=isE?"en":"de";
+  const pi=document.getElementById("pi");
+  if(pi)pi.placeholder=isE?"Password...":"Passwort...";
+  try{localStorage.setItem("pab_lang",isE?"en":"de");}catch(e){}
+  setTimeout(updBgmLabel,10);
 }
 
 function updBgmLabel(){
@@ -561,6 +573,8 @@ new Array("b1","b2","b3","b4").forEach(function(id){
 });
 
 try{
+  const savedLang=localStorage.getItem("pab_lang");
+  if(savedLang==="en"||savedLang==="de")setLang(savedLang);
   if(sessionStorage.getItem("pab_ok")==="1")unlock();
 }catch(e){}
 </script>
