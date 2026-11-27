@@ -28,34 +28,106 @@ html,body{
   box-shadow:0 0 8px rgba(125,211,252,.5)
 }
 .welcome{
-  position:fixed;inset:0;background:rgba(15,41,66,.88);
+  position:fixed;inset:0;background:rgba(15,41,66,.9);
   display:flex;align-items:center;justify-content:center;
-  z-index:2000;padding:20px
+  z-index:2000;padding:20px;backdrop-filter:blur(4px)
+}
+@keyframes palmSway{
+  0%,100%{transform:rotate(-6deg)}
+  50%{transform:rotate(6deg)}
+}
+@keyframes sunSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  50%{transform:rotate(180deg) scale(1.08)}
+  100%{transform:rotate(360deg) scale(1)}
+}
+@keyframes waveMove{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(-10px)}
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-3px) rotate(3deg)}
+}
+@keyframes orbitSmooth{
+  0%{offset-distance:0%}
+  100%{offset-distance:100%}
 }
 .w-card{
-  background:#fff;border:2px solid #7dd3fc;border-radius:16px;
-  padding:26px 24px;text-align:center;max-width:400px;width:100%;
-  box-shadow:0 12px 32px rgba(0,0,0,.45)
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#e0f2fe 0%,#ffffff 52%,#fef9c3 100%);
+  border:2px solid #38bdf8;border-radius:18px;
+  padding:28px 24px 32px 24px;text-align:center;
+  max-width:450px;width:100%;
+  box-shadow:0 16px 40px rgba(0,0,0,.5)
 }
-.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
+.w-deco-sun{
+  position:absolute;top:10px;right:14px;font-size:2.1rem;
+  pointer-events:none;user-select:none;
+  animation:sunSpin 18s linear infinite;
+  filter:drop-shadow(0 0 8px rgba(250,204,21,.75))
+}
+.w-deco-palm{
+  position:absolute;top:12px;left:14px;font-size:2.15rem;
+  pointer-events:none;user-select:none;transform-origin:bottom center;
+  animation:palmSway 3.4s ease-in-out infinite
+}
+.w-deco-row{
+  display:flex;justify-content:center;gap:14px;
+  font-size:1.35rem;margin-bottom:8px;user-select:none
+}
+.w-deco-row span:nth-child(1){animation:palmSway 3s ease-in-out infinite}
+.w-deco-row span:nth-child(2){animation:iconFloat 2.4s ease-in-out infinite}
+.w-deco-row span:nth-child(3){animation:iconFloat 2.8s ease-in-out infinite}
+.w-deco-row span:nth-child(4){animation:palmSway 3.2s ease-in-out infinite}
+.w-wave{
+  position:absolute;left:-10px;right:-10px;bottom:-2px;
+  height:18px;pointer-events:none;opacity:.65;
+  animation:waveMove 4s ease-in-out infinite
+}
+.w-card h2{
+  position:relative;margin:0 0 10px 0;color:#0f2942;
+  font-size:1.38rem
+}
 .w-card p{
-  margin:0 0 18px 0;color:#334155;font-size:.92rem;
-  line-height:1.45
+  position:relative;margin:0 0 18px 0;color:#334155;
+  font-size:.94rem;line-height:1.42;font-weight:bold
 }
 .w-sub-en{
   display:block;color:#0369a1;font-size:.86rem;margin-top:4px
 }
 .w-btn{
+  position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  width:100%;max-width:290px;margin:0 auto;box-sizing:border-box;
-  background:#0284c7;color:#fff;border:none;
-  border-radius:12px;padding:16px 20px;font-size:1.08rem;
-  font-weight:bold;cursor:pointer;text-align:center;
+  gap:10px;width:100%;max-width:340px;margin:0 auto;
+  box-sizing:border-box;
+  background:linear-gradient(135deg,#0284c7 0%,#1d4ed8 100%);
+  color:#fff;border:2px solid #7dd3fc;border-radius:14px;
+  padding:15px 20px;font-size:1.08rem;font-weight:bold;
+  cursor:pointer;text-align:center;
+  box-shadow:0 8px 20px rgba(2,132,199,.45);
+  transition:transform .15s,box-shadow .15s;
   touch-action:manipulation;user-select:none;
   -webkit-tap-highlight-color:transparent
 }
-.w-btn:active{background:#0369a1}
-.w-btn span{pointer-events:none}
+.w-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(29,78,216,.55)
+}
+.w-btn:active{transform:scale(.98)}
+.w-btn span{position:relative;z-index:2;pointer-events:none}
+.btn-p{
+  position:absolute;top:0;left:0;
+  font-size:.95rem;pointer-events:none;user-select:none;
+  offset-path:inset(5px round 11px);
+  offset-rotate:auto 45deg;
+  opacity:.88;
+  animation:orbitSmooth 22s infinite linear;z-index:1
+}
+.btn-p.p1{animation-delay:0s}
+.btn-p.p2{animation-delay:-5.5s}
+.btn-p.p3{animation-delay:-11s}
+.btn-p.p4{animation-delay:-16.5s}
 .hdr{
   display:flex;flex-direction:column;gap:8px;
   background:linear-gradient(180deg,#0f2942 0%,#0c2238 100%);
@@ -133,7 +205,7 @@ body.unlocked .lock-ico{display:none}
 }
 .pic{
   position:relative;border-radius:10px;overflow:hidden;
-  min-height:135px;display:flex;align-items:stretch;
+  min-height:142px;display:flex;align-items:stretch;
   padding:12px 14px;background-color:#0f2942;
   background-image:url("Flügel.jpg");
   background-position:center 22%;background-size:118%;
@@ -151,7 +223,7 @@ body.unlocked .lock-ico{display:none}
 }
 .ptxt h2{
   margin:0;font-size:clamp(1.2rem,2.3vw,1.8rem);
- font-weight:800;letter-spacing:.05em;line-height:1.15;
+  font-weight:800;letter-spacing:.05em;line-height:1.15;
   text-shadow:0 2px 8px rgba(0,0,0,.55)
 }
 .fly-wide{
@@ -164,7 +236,7 @@ body.unlocked .lock-ico{display:none}
     filter:drop-shadow(0 0 4px rgba(185,28,28,.85))
   }
   50%{
-    transform:translate(-6px,4px);
+    transform:translate(-5px,4px);
     filter:drop-shadow(0 0 13px rgba(239,68,68,1))
   }
 }
@@ -173,8 +245,8 @@ body.unlocked .lock-ico{display:none}
   50%{stroke:#ef4444}
 }
 .fly-arrow{
-  display:block;width:270px;height:44px;
-  margin:-2px 0 -2px 175px;overflow:visible;
+  display:block;width:215px;height:44px;
+  margin:-2px 0 -2px 230px;overflow:visible;
   animation:arrowPulse 2.2s infinite ease-in-out
 }
 .fly-arrow polygon{
@@ -184,7 +256,7 @@ body.unlocked .lock-ico{display:none}
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-arrow{width:190px;margin-left:110px}
+  .fly-arrow{width:155px;margin-left:155px}
 }
 .cta{
   display:inline-block;background:#0284c7;color:#fff;
@@ -305,6 +377,11 @@ details p{
 
 <div class="welcome" id="wOverlay">
   <div class="w-card">
+    <span class="w-deco-palm" aria-hidden="true">🌴</span>
+    <span class="w-deco-sun" aria-hidden="true">☀️</span>
+    <div class="w-deco-row" aria-hidden="true">
+      <span>🏝️</span><span>✈️</span><span>🍹</span><span>🌊</span>
+    </div>
     <h2>🌴 Willkommen bei paulausbkk</h2>
     <p>
       Deinem weltweiten Reiseportal für Flüge und Hotels.
@@ -313,13 +390,21 @@ details p{
       </span>
     </p>
     <button type="button" class="w-btn" id="wEnterBtn">
-      <span>Eintreten / Entry ➡️</span>
+      <span class="btn-p p1">✈️</span>
+      <span class="btn-p p2">✈️</span>
+      <span class="btn-p p3">✈️</span>
+      <span class="btn-p p4">✈️</span>
+      <span>🏖️ Eintreten / Entry ➡️</span>
     </button>
+    <svg class="w-wave" viewBox="0 0 400 20"
+      preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 T200,10 T300,10 T400,10 L400,20 L0,20 Z"
+        fill="#38bdf8"/>
+    </svg>
   </div>
 </div>
 
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
-
 <div class="hdr">
   <h1 class="tit">
     <span>
@@ -379,9 +464,9 @@ details p{
             <span class="fly-wide">Want to fly? Click here</span>
           </span>
         </h2>
-        <svg class="fly-arrow" viewBox="0 0 270 44"
+        <svg class="fly-arrow" viewBox="0 0 215 44"
           aria-hidden="true">
-          <polygon points="262,4 266,14 48,31 54,41 6,35 38,14 43,23"/>
+          <polygon points="207,4 211,14 48,31 54,41 6,35 38,14 43,23"/>
         </svg>
         <a id="b4" href="/reise-alert/index.html"
           class="cta locked">
@@ -479,7 +564,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-  <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+     <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
@@ -580,6 +665,7 @@ function updBgmLabel(){
     b.textContent=isEn()?"🎵 Music On":"🎵 Musik An";
   }
 }
+
 function startBgm(){
   bgmOn=true;
   updBgmLabel();
@@ -666,4 +752,3 @@ try{
 </script>
 </body>
 </html>
-  
