@@ -42,6 +42,9 @@ html,body{
   margin:0 0 18px 0;color:#334155;font-size:.92rem;
   line-height:1.45
 }
+.w-sub-en{
+  display:block;color:#0369a1;font-size:.86rem;margin-top:4px
+}
 .w-btn{
   display:flex;align-items:center;justify-content:center;
   width:100%;max-width:290px;margin:0 auto;box-sizing:border-box;
@@ -148,20 +151,40 @@ body.unlocked .lock-ico{display:none}
 }
 .ptxt h2{
   margin:0;font-size:clamp(1.2rem,2.3vw,1.8rem);
-  font-weight:800;letter-spacing:.05em;line-height:1.15;
+ font-weight:800;letter-spacing:.05em;line-height:1.15;
   text-shadow:0 2px 8px rgba(0,0,0,.55)
 }
 .fly-wide{
   display:inline-block;transform:scaleX(1.12);
   transform-origin:left center
 }
+@keyframes arrowPulse{
+  0%,100%{
+    transform:translate(0,0);
+    filter:drop-shadow(0 0 4px rgba(185,28,28,.85))
+  }
+  50%{
+    transform:translate(-6px,4px);
+    filter:drop-shadow(0 0 13px rgba(239,68,68,1))
+  }
+}
+@keyframes arrowStroke{
+  0%,100%{stroke:#991b1b}
+  50%{stroke:#ef4444}
+}
 .fly-arrow{
-  font-size:1.55rem;line-height:1;margin:2px 0 2px 175px;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))
+  display:block;width:270px;height:44px;
+  margin:-2px 0 -2px 175px;overflow:visible;
+  animation:arrowPulse 2.2s infinite ease-in-out
+}
+.fly-arrow polygon{
+  fill:#ffffff;stroke:#dc2626;stroke-width:3.5;
+  stroke-linejoin:round;
+  animation:arrowStroke 2.2s infinite ease-in-out
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-arrow{margin-left:135px}
+  .fly-arrow{width:190px;margin-left:110px}
 }
 .cta{
   display:inline-block;background:#0284c7;color:#fff;
@@ -283,7 +306,12 @@ details p{
 <div class="welcome" id="wOverlay">
   <div class="w-card">
     <h2>🌴 Willkommen bei paulausbkk</h2>
-    <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
+    <p>
+      Deinem weltweiten Reiseportal für Flüge und Hotels.
+      <span class="w-sub-en">
+        Your worldwide travel portal for flights and hotels.
+      </span>
+    </p>
     <button type="button" class="w-btn" id="wEnterBtn">
       <span>Eintreten / Entry ➡️</span>
     </button>
@@ -351,7 +379,10 @@ details p{
             <span class="fly-wide">Want to fly? Click here</span>
           </span>
         </h2>
-        <div class="fly-arrow">↙️</div>
+        <svg class="fly-arrow" viewBox="0 0 270 44"
+          aria-hidden="true">
+          <polygon points="262,4 266,14 48,31 54,41 6,35 38,14 43,23"/>
+        </svg>
         <a id="b4" href="/reise-alert/index.html"
           class="cta locked">
           <span class="lock-ico">🔒 </span>
@@ -448,7 +479,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-          <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+  <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
@@ -549,7 +580,6 @@ function updBgmLabel(){
     b.textContent=isEn()?"🎵 Music On":"🎵 Musik An";
   }
 }
-
 function startBgm(){
   bgmOn=true;
   updBgmLabel();
@@ -636,3 +666,4 @@ try{
 </script>
 </body>
 </html>
+  
