@@ -230,6 +230,15 @@ body.unlocked .lock-ico{display:none}
   display:inline-block;transform:scaleX(1.12);
   transform-origin:left center
 }
+.fly-mid{
+  display:flex;align-items:center;gap:16px;
+  margin:2px 0;min-height:46px
+}
+.fly-a380{
+  width:210px;height:48px;object-fit:cover;object-position:center;
+  border-radius:10px;border:2px solid #7dd3fc;flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,0,0,.55);background:#0f2942
+}
 @keyframes arrowPulse{
   0%,100%{
     transform:translate(0,0);
@@ -246,7 +255,7 @@ body.unlocked .lock-ico{display:none}
 }
 .fly-arrow{
   display:block;width:215px;height:44px;
-  margin:-2px 0 -2px 230px;overflow:visible;
+  margin:0;overflow:visible;
   animation:arrowPulse 2.2s infinite ease-in-out
 }
 .fly-arrow polygon{
@@ -256,7 +265,8 @@ body.unlocked .lock-ico{display:none}
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-arrow{width:155px;margin-left:155px}
+  .fly-a380{width:140px;height:40px}
+  .fly-arrow{width:155px}
 }
 .cta{
   display:inline-block;background:#0284c7;color:#fff;
@@ -464,10 +474,14 @@ details p{
             <span class="fly-wide">Want to fly? Click here</span>
           </span>
         </h2>
-        <svg class="fly-arrow" viewBox="0 0 215 44"
-          aria-hidden="true">
-          <polygon points="207,4 211,14 48,31 54,41 6,35 38,14 43,23"/>
-        </svg>
+        <div class="fly-mid">
+          <img class="fly-a380" src="a380.jpg" alt="Airbus A380"
+            onerror="this.onerror=null;this.src='https://wikimedia.org'">
+          <svg class="fly-arrow" viewBox="0 0 215 44"
+            aria-hidden="true">
+            <polygon points="207,4 211,14 48,31 54,41 6,35 38,14 43,23"/>
+          </svg>
+        </div>
         <a id="b4" href="/reise-alert/index.html"
           class="cta locked">
           <span class="lock-ico">🔒 </span>
@@ -564,7 +578,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-     <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+    <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
