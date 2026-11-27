@@ -28,31 +28,112 @@ html,body{
   box-shadow:0 0 8px rgba(125,211,252,.5)
 }
 .welcome{
-  position:fixed;inset:0;background:rgba(15,41,66,.88);
+  position:fixed;inset:0;background:rgba(15,41,66,.78);
   display:flex;align-items:center;justify-content:center;
   z-index:2000;padding:20px
 }
-.w-card{
-  background:#fff;border:2px solid #7dd3fc;border-radius:16px;
-  padding:26px 24px;text-align:center;max-width:400px;width:100%;
-  box-shadow:0 12px 32px rgba(0,0,0,.45)
+@keyframes palmSway{
+  0%,100%{transform:rotate(-6deg)}
+  50%{transform:rotate(6deg)}
 }
-.w-card h2{margin:0 0 10px 0;color:#0f2942;font-size:1.35rem}
+@keyframes sunSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  50%{transform:rotate(180deg) scale(1.08)}
+  100%{transform:rotate(360deg) scale(1)}
+}
+@keyframes waveMove{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(-10px)}
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-3px) rotate(3deg)}
+}
+@keyframes orbitSmooth{
+  0%{offset-distance:0%}
+  100%{offset-distance:100%}
+}
+.w-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#e0f2fe 0%,#ffffff 52%,#fef9c3 100%);
+  border:2px solid #38bdf8;border-radius:18px;
+  padding:28px 24px 32px 24px;text-align:center;
+  max-width:460px;width:100%;
+  box-shadow:0 16px 40px rgba(0,0,0,.5)
+}
+.w-deco-sun{
+  position:absolute;top:10px;right:14px;font-size:2.1rem;
+  pointer-events:none;user-select:none;
+  animation:sunSpin 18s linear infinite;
+  filter:drop-shadow(0 0 8px rgba(250,204,21,.75))
+}
+.w-deco-palm{
+  position:absolute;top:12px;left:14px;font-size:2.15rem;
+  pointer-events:none;user-select:none;transform-origin:bottom center;
+  animation:palmSway 3.4s ease-in-out infinite
+}
+.w-deco-row{
+  display:flex;justify-content:center;gap:14px;
+  font-size:1.35rem;margin-bottom:8px;user-select:none
+}
+.w-deco-row span:nth-child(1){animation:palmSway 3s ease-in-out infinite}
+.w-deco-row span:nth-child(2){animation:iconFloat 2.4s ease-in-out infinite}
+.w-deco-row span:nth-child(3){animation:iconFloat 2.8s ease-in-out infinite}
+.w-deco-row span:nth-child(4){animation:palmSway 3.2s ease-in-out infinite}
+.w-wave{
+  position:absolute;left:-10px;right:-10px;bottom:-2px;
+  height:18px;pointer-events:none;opacity:.65;
+  animation:waveMove 4s ease-in-out infinite
+}
+.w-card h2{
+  position:relative;margin:0 0 10px 0;color:#0f2942;
+  font-size:1.38rem
+}
 .w-card p{
-  margin:0 0 18px 0;color:#334155;font-size:.92rem;
-  line-height:1.45
+  position:relative;margin:0 0 18px 0;color:#334155;
+  font-size:.94rem;line-height:1.42;font-weight:bold
+}
+.w-sub-en{
+  display:block;color:#0369a1;font-size:.86rem;margin-top:4px
 }
 .w-btn{
+  position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  width:100%;max-width:290px;margin:0 auto;box-sizing:border-box;
-  background:#0284c7;color:#fff;border:none;
-  border-radius:12px;padding:16px 20px;font-size:1.08rem;
-  font-weight:bold;cursor:pointer;text-align:center;
+  gap:12px;width:100%;max-width:410px;margin:0 auto;
+  box-sizing:border-box;white-space:nowrap;
+  background:linear-gradient(135deg,#0284c7 0%,#1d4ed8 100%);
+  color:#fff;border:2px solid #7dd3fc;border-radius:14px;
+  padding:9px 14px 9px 10px;font-size:.98rem;font-weight:bold;
+  cursor:pointer;text-align:center;
+  box-shadow:0 8px 20px rgba(2,132,199,.45);
+  transition:transform .15s,box-shadow .15s;
   touch-action:manipulation;user-select:none;
   -webkit-tap-highlight-color:transparent
 }
-.w-btn:active{background:#0369a1}
-.w-btn span{pointer-events:none}
+.w-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(29,78,216,.55)
+}
+.w-btn:active{transform:scale(.98)}
+.w-btn-txt{position:relative;z-index:2;pointer-events:none}
+.w-a380{
+  position:relative;z-index:2;display:block;
+  width:94px;height:40px;border-radius:8px;
+  border:1.5px solid #bae6fd;flex-shrink:0;
+  overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.4)
+}
+.btn-p{
+  position:absolute;top:0;left:0;margin:0;
+  font-size:.95rem;pointer-events:none;user-select:none;
+  offset-path:inset(5px round 11px);
+  offset-rotate:auto 45deg;
+  opacity:.88;
+  animation:orbitSmooth 22s infinite linear;z-index:1
+}
+.btn-p.p1{animation-delay:0s}
+.btn-p.p2{animation-delay:-5.5s}
+.btn-p.p3{animation-delay:-11s}
+.btn-p.p4{animation-delay:-16.5s}
 .hdr{
   display:flex;flex-direction:column;gap:8px;
   background:linear-gradient(180deg,#0f2942 0%,#0c2238 100%);
@@ -130,7 +211,7 @@ body.unlocked .lock-ico{display:none}
 }
 .pic{
   position:relative;border-radius:10px;overflow:hidden;
-  min-height:135px;display:flex;align-items:stretch;
+  min-height:142px;display:flex;align-items:stretch;
   padding:12px 14px;background-color:#0f2942;
   background-image:url("Flügel.jpg");
   background-position:center 22%;background-size:118%;
@@ -155,13 +236,33 @@ body.unlocked .lock-ico{display:none}
   display:inline-block;transform:scaleX(1.12);
   transform-origin:left center
 }
+@keyframes arrowPulse{
+  0%,100%{
+    transform:translate(0,0);
+    filter:drop-shadow(0 0 4px rgba(185,28,28,.85))
+  }
+  50%{
+    transform:translate(-4px,4px);
+    filter:drop-shadow(0 0 13px rgba(239,68,68,1))
+  }
+}
+@keyframes arrowStroke{
+  0%,100%{stroke:#991b1b}
+  50%{stroke:#ef4444}
+}
 .fly-arrow{
-  font-size:1.55rem;line-height:1;margin:2px 0 2px 175px;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))
+  display:block;width:170px;height:42px;
+  margin:10px 0 -12px 276px;overflow:visible;
+  animation:arrowPulse 2.2s infinite ease-in-out
+}
+.fly-arrow polygon{
+  fill:#ffffff;stroke:#dc2626;stroke-width:3.5;
+  stroke-linejoin:round;
+  animation:arrowStroke 2.2s infinite ease-in-out
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-arrow{margin-left:135px}
+  .fly-arrow{width:130px;margin:10px 0 -12px 232px}
 }
 .cta{
   display:inline-block;background:#0284c7;color:#fff;
@@ -282,16 +383,69 @@ details p{
 
 <div class="welcome" id="wOverlay">
   <div class="w-card">
+    <span class="w-deco-palm" aria-hidden="true">🌴</span>
+    <span class="w-deco-sun" aria-hidden="true">☀️</span>
+    <div class="w-deco-row" aria-hidden="true">
+      <span>🏝️</span><span>✈️</span><span>🍹</span><span>🌊</span>
+    </div>
     <h2>🌴 Willkommen bei paulausbkk</h2>
-    <p>Deinem weltweiten Reiseportal für Flüge und Hotels.</p>
+    <p>
+      Deinem weltweiten Reiseportal für Flüge und Hotels.
+      <span class="w-sub-en">
+        Your worldwide travel portal for flights and hotels.
+      </span>
+    </p>
     <button type="button" class="w-btn" id="wEnterBtn">
-      <span>Eintreten / Entry ➡️</span>
+      <span class="btn-p p1">✈️</span>
+      <span class="btn-p p2">✈️</span>
+      <span class="btn-p p3">✈️</span>
+      <span class="btn-p p4">✈️</span>
+      <svg class="w-a380" viewBox="0 0 240 50"
+        role="img" aria-label="Airbus A380">
+        <defs>
+          <linearGradient id="skyA380" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0369a1"/>
+            <stop offset="65%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#bae6fd"/>
+          </linearGradient>
+          <linearGradient id="hullA380" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="72%" stop-color="#f1f5f9"/>
+            <stop offset="100%" stop-color="#94a3b8"/>
+          </linearGradient>
+        </defs>
+        <rect width="240" height="50" fill="url(#skyA380)"/>
+        <ellipse cx="48" cy="41" rx="34" ry="6" fill="#fff" opacity=".32"/>
+        <ellipse cx="185" cy="11" rx="40" ry="5" fill="#fff" opacity=".25"/>
+        <polygon points="34,30 14,10 29,11 52,27" fill="#0284c7"/>
+        <polygon points="34,30 14,10 19,10 39,28" fill="#38bdf8"/>
+        <polygon points="18,33 5,28 9,25 26,30" fill="#cbd5e1"/>
+        <path d="M26,31 Q28,20 48,18 L186,12 Q216,12 228,20 Q232,24 222,27 L44,35 Q29,35 26,31 Z"
+          fill="url(#hullA380)"/>
+        <path d="M210,16 L221,17 L218,20 L209,19 Z" fill="#0f172a"/>
+        <line x1="62" y1="20" x2="198" y2="15"
+          stroke="#334155" stroke-width="1.6" stroke-dasharray="1.8 1.5"/>
+        <line x1="48" y1="25" x2="205" y2="20"
+          stroke="#334155" stroke-width="1.6" stroke-dasharray="1.8 1.5"/>
+        <polygon points="104,26 52,44 65,45 136,25" fill="#e2e8f0"/>
+        <polygon points="52,44 48,39 53,39 56,44" fill="#0284c7"/>
+        <rect x="84" y="34" width="13" height="5.5" rx="2.5" fill="#475569"/>
+        <rect x="94" y="34" width="3" height="5.5" rx="1" fill="#cbd5e1"/>
+        <rect x="112" y="29" width="14" height="6" rx="2.5" fill="#334155"/>
+        <rect x="123" y="29" width="3" height="6" rx="1" fill="#e2e8f0"/>
+        <path d="M35,32 L212,24" stroke="#0284c7" stroke-width="1.4" opacity=".8"/>
+      </svg>
+      <span class="w-btn-txt">🏖️ Eintreten / Entry ➡️</span>
     </button>
+    <svg class="w-wave" viewBox="0 0 400 20"
+      preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 T200,10 T300,10 T400,10 L400,20 L0,20 Z"
+        fill="#38bdf8"/>
+    </svg>
   </div>
 </div>
 
 <audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
-
 <div class="hdr">
   <h1 class="tit">
     <span>
@@ -351,7 +505,10 @@ details p{
             <span class="fly-wide">Want to fly? Click here</span>
           </span>
         </h2>
-        <div class="fly-arrow">↙️</div>
+        <svg class="fly-arrow" viewBox="0 0 170 42"
+          aria-hidden="true">
+          <polygon points="163,3 167,13 38,31 44,40 2,39 30,15 35,23"/>
+        </svg>
         <a id="b4" href="/reise-alert/index.html"
           class="cta locked">
           <span class="lock-ico">🔒 </span>
@@ -448,7 +605,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-          <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+    <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
@@ -517,7 +674,7 @@ details p{
 <span class="en-txt">✖ Close</span></a>
 <img src="20250205_181003.jpg" alt="4"></div>
 <script>
-const PASS="paul2026";
+const PASS="123";
 let ok=false;
 let bgmOn=false;
 
