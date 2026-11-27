@@ -98,13 +98,13 @@ html,body{
 }
 .w-btn{
   position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:flex-start;
-  gap:14px;width:100%;max-width:400px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;width:100%;max-width:410px;margin:0 auto;
   box-sizing:border-box;white-space:nowrap;
   background:linear-gradient(135deg,#0284c7 0%,#1d4ed8 100%);
   color:#fff;border:2px solid #7dd3fc;border-radius:14px;
-  padding:9px 18px 9px 11px;font-size:1.05rem;font-weight:bold;
-  cursor:pointer;text-align:left;
+  padding:9px 14px 9px 10px;font-size:.98rem;font-weight:bold;
+  cursor:pointer;text-align:center;
   box-shadow:0 8px 20px rgba(2,132,199,.45);
   transition:transform .15s,box-shadow .15s;
   touch-action:manipulation;user-select:none;
@@ -115,15 +115,15 @@ html,body{
   box-shadow:0 12px 24px rgba(29,78,216,.55)
 }
 .w-btn:active{transform:scale(.98)}
-.w-btn span{position:relative;z-index:2;pointer-events:none}
+.w-btn-txt{position:relative;z-index:2;pointer-events:none}
 .w-a380{
   position:relative;z-index:2;display:block;
-  width:112px;height:44px;border-radius:9px;
+  width:94px;height:40px;border-radius:8px;
   border:1.5px solid #bae6fd;flex-shrink:0;
   overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.4)
 }
 .btn-p{
-  position:absolute;top:0;left:0;
+  position:absolute;top:0;left:0;margin:0;
   font-size:.95rem;pointer-events:none;user-select:none;
   offset-path:inset(5px round 11px);
   offset-rotate:auto 45deg;
@@ -252,7 +252,7 @@ body.unlocked .lock-ico{display:none}
 }
 .fly-arrow{
   display:block;width:170px;height:42px;
-  margin:4px 0 -6px 262px;overflow:visible;
+  margin:10px 0 -12px 276px;overflow:visible;
   animation:arrowPulse 2.2s infinite ease-in-out
 }
 .fly-arrow polygon{
@@ -262,7 +262,7 @@ body.unlocked .lock-ico{display:none}
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-arrow{width:130px;margin-left:220px}
+  .fly-arrow{width:130px;margin:10px 0 -12px 232px}
 }
 .cta{
   display:inline-block;background:#0284c7;color:#fff;
@@ -435,7 +435,7 @@ details p{
         <rect x="123" y="29" width="3" height="6" rx="1" fill="#e2e8f0"/>
         <path d="M35,32 L212,24" stroke="#0284c7" stroke-width="1.4" opacity=".8"/>
       </svg>
-      <span>🏖️ Eintreten / Entry ➡️</span>
+      <span class="w-btn-txt">🏖️ Eintreten / Entry ➡️</span>
     </button>
     <svg class="w-wave" viewBox="0 0 400 20"
       preserveAspectRatio="none" aria-hidden="true">
@@ -605,7 +605,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-   <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+    <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
