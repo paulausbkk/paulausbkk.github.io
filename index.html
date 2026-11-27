@@ -99,11 +99,11 @@ html,body{
 .w-btn{
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  gap:10px;width:100%;max-width:340px;margin:0 auto;
-  box-sizing:border-box;
+  gap:10px;width:100%;max-width:360px;margin:0 auto;
+  box-sizing:border-box;white-space:nowrap;
   background:linear-gradient(135deg,#0284c7 0%,#1d4ed8 100%);
   color:#fff;border:2px solid #7dd3fc;border-radius:14px;
-  padding:15px 20px;font-size:1.08rem;font-weight:bold;
+  padding:15px 22px;font-size:1.05rem;font-weight:bold;
   cursor:pointer;text-align:center;
   box-shadow:0 8px 20px rgba(2,132,199,.45);
   transition:transform .15s,box-shadow .15s;
@@ -232,12 +232,12 @@ body.unlocked .lock-ico{display:none}
 }
 .fly-mid{
   display:flex;align-items:center;gap:14px;
-  margin:2px 0 -4px 0;min-height:46px
+  margin:2px 0 -4px 0;min-height:48px
 }
 .fly-a380{
-  width:240px;height:48px;object-fit:cover;object-position:center;
+  display:block;width:240px;height:50px;
   border-radius:10px;border:2px solid #7dd3fc;flex-shrink:0;
-  box-shadow:0 4px 14px rgba(0,0,0,.55);background:#0f2942
+  box-shadow:0 4px 14px rgba(0,0,0,.55);overflow:hidden
 }
 @keyframes arrowPulse{
   0%,100%{
@@ -265,7 +265,7 @@ body.unlocked .lock-ico{display:none}
 }
 @media(max-width:740px){
   .fly-wide{transform:none}
-  .fly-a380{width:170px;height:40px}
+  .fly-a380{width:170px;height:42px}
   .fly-arrow{width:155px}
 }
 .cta{
@@ -413,6 +413,8 @@ details p{
     </svg>
   </div>
 </div>
+
+<audio id="bgm" src="musik.mp3" loop preload="auto"></audio>
 <div class="hdr">
   <h1 class="tit">
     <span>
@@ -473,8 +475,41 @@ details p{
           </span>
         </h2>
         <div class="fly-mid">
-          <img class="fly-a380" src="a380.jpg" alt="Airbus A380"
-            onerror="this.onerror=null;this.src='https://wikimedia.org'">
+          <svg class="fly-a380" viewBox="0 0 240 50"
+            role="img" aria-label="Airbus A380">
+            <defs>
+              <linearGradient id="skyA380" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0369a1"/>
+                <stop offset="65%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#bae6fd"/>
+              </linearGradient>
+              <linearGradient id="hullA380" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="72%" stop-color="#f1f5f9"/>
+                <stop offset="100%" stop-color="#94a3b8"/>
+              </linearGradient>
+            </defs>
+            <rect width="240" height="50" fill="url(#skyA380)"/>
+            <ellipse cx="48" cy="41" rx="34" ry="6" fill="#fff" opacity=".32"/>
+            <ellipse cx="185" cy="11" rx="40" ry="5" fill="#fff" opacity=".25"/>
+            <polygon points="34,30 14,10 29,11 52,27" fill="#0284c7"/>
+            <polygon points="34,30 14,10 19,10 39,28" fill="#38bdf8"/>
+            <polygon points="18,33 5,28 9,25 26,30" fill="#cbd5e1"/>
+            <path d="M26,31 Q28,20 48,18 L186,12 Q216,12 228,20 Q232,24 222,27 L44,35 Q29,35 26,31 Z"
+              fill="url(#hullA380)"/>
+            <path d="M210,16 L221,17 L218,20 L209,19 Z" fill="#0f172a"/>
+            <line x1="62" y1="20" x2="198" y2="15"
+              stroke="#334155" stroke-width="1.6" stroke-dasharray="1.8 1.5"/>
+            <line x1="48" y1="25" x2="205" y2="20"
+              stroke="#334155" stroke-width="1.6" stroke-dasharray="1.8 1.5"/>
+            <polygon points="104,26 52,44 65,45 136,25" fill="#e2e8f0"/>
+            <polygon points="52,44 48,39 53,39 56,44" fill="#0284c7"/>
+            <rect x="84" y="34" width="13" height="5.5" rx="2.5" fill="#475569"/>
+            <rect x="94" y="34" width="3" height="5.5" rx="1" fill="#cbd5e1"/>
+            <rect x="112" y="29" width="14" height="6" rx="2.5" fill="#334155"/>
+            <rect x="123" y="29" width="3" height="6" rx="1" fill="#e2e8f0"/>
+            <path d="M35,32 L212,24" stroke="#0284c7" stroke-width="1.4" opacity=".8"/>
+          </svg>
           <svg class="fly-arrow" viewBox="0 0 215 44"
             aria-hidden="true">
             <polygon points="207,4 211,14 48,31 54,41 6,35 38,14 43,23"/>
@@ -489,7 +524,6 @@ details p{
       </div>
     </div>
   </div>
-
   <div class="box">
     <div class="ct">
       <span>
@@ -576,7 +610,7 @@ details p{
       <details>
         <summary>
           <span class="de-txt">🛂 Einreise & Dokumente weltweit</span>
-  <span class="en-txt">🛂 Entry & Documents Worldwide</span>
+          <span class="en-txt">🛂 Entry & Documents Worldwide</span>
         </summary>
         <p>
           <span class="de-txt">
